@@ -4,6 +4,21 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!-- The colors of primeng's soho dark theme -->
+    <Color x:Key="text-color">#ffffff</Color>
+    <Color x:Key="primary-color">#b19df7</Color>
+    <Color x:Key="primary-color-text">#1c1d26</Color>
+    <Color x:Key="highlight-bg">#29b19df7</Color>
+    <Color x:Key="highlight-text-color">#b19df7</Color>
+    <Color x:Key="surface-ground">#1d1e27</Color>
+    <Color x:Key="surface-section">#1d1e27</Color>
+    <Color x:Key="surface-card">#282936</Color>
+    <Color x:Key="surface-overlay">#282936</Color>
+    <Color x:Key="surface-border">#3e4053</Color>
+    <Color x:Key="surface-hover">#08ffffff</Color>
+    
+    
+    <!-- below are the default colors so we dont break anything -->
     <Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>

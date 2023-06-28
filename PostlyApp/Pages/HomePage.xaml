@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:PostlyApp.Views"
+             x:Class="PostlyApp.Pages.HomePage"
+             Title="Home">
+    
+    <!-- Here we have to distinct in some sort of tab view between public and following feed -->
+    <!-- For now lets just add e.g. the public feed: -->
+    <views:PostlistView x:Name="publicFeed" Margin="25,25,25,25"></views:PostlistView>
+</ContentPage>
