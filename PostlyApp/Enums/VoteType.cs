@@ -1,4 +1,4 @@
-﻿namespace PostlyApi.Enums
+﻿namespace PostlyApp.Enums
 {
     public enum VoteType
     {

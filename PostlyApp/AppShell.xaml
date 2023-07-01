@@ -4,11 +4,39 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PostlyApp"
+    x:Name="PostlyAppShell"
+    FlyoutBehavior="Flyout"
+    FlyoutBackground="{StaticResource surface-overlay}"
     xmlns:pages="clr-namespace:PostlyApp.Pages">
 
     <ShellContent
+        x:Name="PostlyLoginPage"
+        Title="Login"
+        Route="Login"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"
+        ContentTemplate="{DataTemplate pages:LoginPage}">
+    </ShellContent>
+
+    <ShellContent
+        x:Name="PostlyHomePage"
         Title="Home"
+        Route="Home"
         ContentTemplate="{DataTemplate pages:HomePage}">
     </ShellContent>
 
+    <ShellContent
+        x:Name="PostlyProfilePage"
+        Title="Profile"
+        Route="Profile"
+        ContentTemplate="{DataTemplate pages:ProfilePage}">
+    </ShellContent>
+
+    <Shell.FlyoutHeader>
+        <Label x:Name="helloLabel" Margin="25,25,25,25"></Label>
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <Button Text="Logout" Margin="25,0,25,25" Clicked="OnLogoutClicked"/>
+    </Shell.FlyoutFooter>
 </Shell>

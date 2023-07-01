@@ -1,6 +1,6 @@
-﻿using PostlyApi.Enums;
+﻿using PostlyApp.Enums;
 
-namespace PostlyApi.Models.DTOs
+namespace PostlyApp.Models.DTOs
 {
     public class PostDTO
     {

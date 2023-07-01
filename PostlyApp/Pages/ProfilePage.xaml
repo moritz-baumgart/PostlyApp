@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PostlyApp.Pages.ProfilePage"
+             Title="Profile"
+             Padding="30">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="FollowCount">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#555" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="LightLabel">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Grey" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Padding="0,0,0,1">
+        <Grid ColumnDefinitions="*, Auto"
+         RowDefinitions="Auto, Auto, Auto, Auto"
+          BackgroundColor="#1d1e27"
+              Padding="0, 0, 0, 30"
+          >
+
+            <Border Grid.Row="0"
+               Grid.Column="0"
+                Stroke="White"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 50"
+                HeightRequest="50"
+               WidthRequest="50"
+                HorizontalOptions="Start">
+                <Image 
+               Source="usersolid.svg"
+               Aspect="Center"
+               HeightRequest="30"
+               WidthRequest="30" />
+            </Border>
+
+            <Grid Grid.Row="0"
+              Grid.Column="1"
+              HeightRequest="40"
+              WidthRequest="40">
+                <Ellipse Stroke="black"
+                     StrokeThickness="3"
+                     HeightRequest="40"
+                     WidthRequest="40" />
+                <Image Source="vertical_menu.svg"
+                   Aspect="AspectFill"
+                   HeightRequest="15"
+                   WidthRequest="10"
+                   VerticalOptions="Start"
+                />
+            </Grid>
+
+            <Label Grid.Row="1"
+               Grid.ColumnSpan="2"
+               Text="Post.ly"
+               FontAttributes="Bold"
+               FontSize="22"
+               TextColor="White"
+               Margin="0, 20, 0, 0"/>
+
+            <Label Grid.Row="2"
+               Grid.ColumnSpan="2"
+               Text="@Post.ly"
+               Style="{x:StaticResource LightLabel}"/>
+
+            <HorizontalStackLayout Grid.Row="3"
+                               Grid.ColumnSpan="2"
+                               Margin="0, 20, 0, 0">
+                <Label Text="1000" 
+                   Style="{x:StaticResource FollowCount}"  />
+
+                <Label Text="Following"
+                   Style="{x:StaticResource LightLabel}"
+                   Margin="5, 0, 0, 0"/>
+
+                <Label Text="88" 
+                   Style="{x:StaticResource FollowCount}"
+                   Margin="20, 0, 0, 0"/>
+
+                <Label Text="Follower"
+                   Style="{x:StaticResource LightLabel}"
+                   Margin="5, 0, 0, 0"/>
+            </HorizontalStackLayout>
+
+            <Grid>
+                <VerticalStackLayout VerticalOptions="Center" 
+                         HorizontalOptions="End">
+
+                    <Button Text="Follow" BackgroundColor="#b19df7" TextColor="White"></Button>
+                </VerticalStackLayout>
+            </Grid>
+
+        </Grid>
+    </Grid>
+
+
+
+
+</ContentPage>

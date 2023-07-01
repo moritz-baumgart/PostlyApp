@@ -1,4 +1,4 @@
-using PostlyApi.Models.DTOs;
+using PostlyApp.Models.DTOs;
 
 namespace PostlyApp.Views;
 
