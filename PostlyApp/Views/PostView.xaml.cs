@@ -17,8 +17,16 @@ public partial class PostView : ContentView
     {
         if (bindable is PostView postView)
         {
+            if (postView.Post.Author.DisplayName != null && postView.Post.Author.DisplayName.Length > 0)
+            {
+                postView.author.Text = postView.Post.Author.DisplayName + " (@" + postView.Post.Author.Username + ")";
+            }
+            else
+            {
+                postView.author.Text = "@" + postView.Post.Author.Username;
+            }
+            postView.date.Text = postView.Post.CreatedAt.ToLocalTime().ToString();
             postView.content.Text = postView.Post.Content;
-            postView.author.Text = postView.Post.Author.Username;
         }
     }
 

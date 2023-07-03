@@ -7,5 +7,5 @@
     
     <!-- Here we have to distinct in some sort of tab view between public and following feed -->
     <!-- For now lets just add e.g. the public feed: -->
-    <views:PostlistView x:Name="publicFeed" Margin="25,25,25,25"></views:PostlistView>
+    <views:PostlistView x:Name="publicFeed" Margin="20,20,20,20"></views:PostlistView>
 </ContentPage>

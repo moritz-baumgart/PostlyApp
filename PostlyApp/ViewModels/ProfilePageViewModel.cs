@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-
-namespace PostlyApp.ViewModels
+﻿namespace PostlyApp.ViewModels
 {
     public class ProfilePageViewModel
     {
