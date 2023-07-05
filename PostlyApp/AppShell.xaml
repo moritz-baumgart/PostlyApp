@@ -31,7 +31,14 @@
         Route="Profile"
         ContentTemplate="{DataTemplate pages:ProfilePage}">
     </ShellContent>
-
+    
+    <ShellContent
+        x:Name="PostlySearchPage"
+        Title="Search"
+        Route="Search"
+        ContentTemplate="{DataTemplate pages:SearchPage}">
+    </ShellContent>
+    
     <Shell.FlyoutHeader>
         <Label x:Name="helloLabel" Margin="25,25,25,25"></Label>
     </Shell.FlyoutHeader>

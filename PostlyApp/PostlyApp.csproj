@@ -74,6 +74,9 @@
 		<MauiXaml Update="Pages\ProfilePage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Pages\SearchPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Views\PostlistView.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

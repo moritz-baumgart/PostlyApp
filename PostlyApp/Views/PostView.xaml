@@ -6,5 +6,11 @@
         <Label x:Name="author" FontAttributes="Bold" FontSize="17"/>
         <Label x:Name="date" FontSize="13" TextColor="Grey"/>
         <Label x:Name="content" FontSize="15"/>
+        <HorizontalStackLayout>
+            <Label x:Name="UpvoteCount" />
+            <Label x:Name="  DownvoteCount" />
+            <Label x:Name="  CommentCount" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
+    
 </ContentView>
