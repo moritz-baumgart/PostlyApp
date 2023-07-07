@@ -1,4 +1,7 @@
+using Microsoft.Maui.Controls;
 using PostlyApp.Models.DTOs;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace PostlyApp.Views;
 

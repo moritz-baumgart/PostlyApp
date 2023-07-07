@@ -37,9 +37,8 @@ namespace PostlyApp.Services.Impl
             {
                 if (paginationStart != null)
                 {
-                    string paginationStartJson = JsonSerializer.Serialize(paginationStart, _serializerOptions);
                     var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-                    query["paginationStart"] = paginationStartJson;
+                    query["paginationStart"] = ((DateTimeOffset) paginationStart).ToString("o");
                     uriBuilder.Query = query.ToString();
                 }
 

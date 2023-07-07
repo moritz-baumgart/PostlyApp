@@ -4,13 +4,13 @@
              xmlns:views="clr-namespace:PostlyApp.Views"
              x:Class="PostlyApp.Pages.HomePage"
              Title="Home">
-    
+
     <!-- Here we have to distinct in some sort of tab view between public and following feed -->
     <!-- For now lets just add e.g. the public feed: -->
 
     <Shell.TitleView>
         <StackLayout>
-            <Button Text="Post"  VerticalOptions="Center" HorizontalOptions="End"/>
+            <Button Text="Post"  VerticalOptions="Center" HorizontalOptions="End" />
         </StackLayout>
     </Shell.TitleView>
 
@@ -18,7 +18,8 @@
     <ScrollView VerticalScrollBarVisibility="Always">
         <StackLayout>
             <views:PostlistView x:Name="publicFeed" Margin="20,20,20,20"></views:PostlistView>
+            <Button x:Name="loadMorePublicBtn" IsVisible="false" HorizontalOptions="Center" Text="Load more" Clicked="OnLoadMorePublic" Margin="0,0,0,25"></Button>
         </StackLayout>
     </ScrollView>
-    
+
 </ContentPage>
