@@ -6,7 +6,7 @@ namespace PostlyApp.Services
     {
         public JwtSecurityToken SetCurrentTokenFromString(string tokenString);
         public void DeleteCurrentToken();
-        public event Action<JwtSecurityToken> CurrentTokenChanged;
+        public event Action<JwtSecurityToken?> CurrentTokenChanged;
         public string? GetUserName();
     }
 }

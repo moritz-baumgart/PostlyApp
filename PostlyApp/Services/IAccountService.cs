@@ -1,9 +1,12 @@
-﻿namespace PostlyApp.Services
+﻿using PostlyApp.Models.DTOs;
+
+namespace PostlyApp.Services
 {
     public interface IAccountService
     {
         public Task<bool> GetStatus();
         public Task<bool?> Login(string username, string password);
         public void Logout();
+        public Task<UserProfileViewModel?> GetUserProfile(string? username);
     }
 }

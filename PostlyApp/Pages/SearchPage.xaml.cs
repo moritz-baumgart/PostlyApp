@@ -10,7 +10,7 @@ public partial class SearchPage : ContentPage
 {
     private readonly ISearchService _search;
 
-    public ObservableCollection<string> SearchResult { get; set; } = new ObservableCollection<string>();
+    public ObservableCollection<UserDTO> SearchResult { get; set; } = new ObservableCollection<UserDTO>();
 
     public SearchPage()
     {
@@ -38,14 +38,23 @@ public partial class SearchPage : ContentPage
 
             foreach (var user in users)
             {
-                if (user.DisplayName != null && user.DisplayName.Length > 0)
-                {
-                    SearchResult.Add($"{user.DisplayName} (@{user.Username})");
-                }
-                else
-                {
-                    SearchResult.Add($"@{user.Username}");
-                }
+                SearchResult.Add(user);
             }
+    }
+
+    private async void OnGoToProfile(object sender, TappedEventArgs e)
+    {
+        if (sender is Label label)
+        {
+            var username = ((UserDTO)label.BindingContext).Username;
+            await Shell.Current.GoToAsync($"//Profile?Username={username}");
+        }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        searchBar.Text = "";
+        SearchResult.Clear();
     }
 }

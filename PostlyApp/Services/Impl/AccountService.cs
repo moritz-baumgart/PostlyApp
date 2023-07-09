@@ -6,6 +6,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using PostlyApp.Models.Requests;
 using System.Net;
+using PostlyApp.Models.DTOs;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace PostlyApp.Services.Impl
 {
@@ -29,6 +31,19 @@ namespace PostlyApp.Services.Impl
                 WriteIndented = true
             };
             _jwt = DependencyService.Resolve<IJwtService>();
+            _jwt.CurrentTokenChanged += OnTokenChange;
+        }
+
+        private void OnTokenChange(JwtSecurityToken? token)
+        {
+            if (token != null)
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.RawData);
+            }
+            else
+            {
+                _client.DefaultRequestHeaders.Authorization = null;
+            }
         }
 
 
@@ -41,14 +56,6 @@ namespace PostlyApp.Services.Impl
             var uri = new Uri(Constants.API_BASE + "/account/status");
             try
             {
-                var token = Preferences.Get("jwt", null);
-                if (token == null)
-                {
-                    return false;
-                }
-
-                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
                 var response = await _client.GetAsync(uri);
 
                 if (response.IsSuccessStatusCode)
@@ -70,6 +77,29 @@ namespace PostlyApp.Services.Impl
             {
                 await ShowConnectionError();
                 return false;
+            }
+        }
+
+        public async Task<UserProfileViewModel?> GetUserProfile(string? username)
+        {
+            var uri = new Uri(Constants.API_BASE + $"/account/{username ?? "me"}/profile");
+
+            try
+            {
+                var res = await _client.GetAsync(uri);
+
+                if (!res.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+
+                return await ApiUtilities.DecodeJsonResponse<UserProfileViewModel>(res);
+
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
 
@@ -109,7 +139,7 @@ namespace PostlyApp.Services.Impl
             }
             catch (Exception)
             {
-                await ShowConnectionError();
+                await AccountService.ShowConnectionError();
                 return null;
             }
 
@@ -124,7 +154,7 @@ namespace PostlyApp.Services.Impl
             await Shell.Current.GoToAsync("//Login");
         }
 
-        private async Task ShowConnectionError()
+        private static async Task ShowConnectionError()
         {
             var toast = Toast.Make("Error connecting to server. Try again later!", ToastDuration.Long);
             await toast.Show();

@@ -57,11 +57,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Models\DTOs\" />
-		<Folder Include="Enums\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Compile Update="Pages\LoginPage.xaml.cs">
 			<DependentUpon>LoginPage.xaml</DependentUpon>
 		</Compile>

@@ -19,7 +19,7 @@ namespace PostlyApp.Services.Impl
                 }
             }
         }
-        public event Action<JwtSecurityToken> CurrentTokenChanged;
+        public event Action<JwtSecurityToken?> CurrentTokenChanged;
 
         public JwtSecurityToken SetCurrentTokenFromString(string tokenString)
         {
