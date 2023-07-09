@@ -4,9 +4,15 @@
              x:Class="PostlyApp.Pages.SearchPage"
              Title="Search">
     <ScrollView>
-        <StackLayout>
-            <SearchBar Placeholder = "Search Users">
-            </SearchBar>
+        <StackLayout Margin="20,20,20,20">
+            <SearchBar x:Name="searchBar" Placeholder = "Search Users" SearchCommand="{Binding SearchCommand}" Margin="0,0,0,20"></SearchBar>
+            <StackLayout BindableLayout.ItemsSource="{Binding SearchResult}" Spacing="20">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding}" BackgroundColor="{StaticResource surface-card}" Padding="10,10,10,10" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -27,6 +27,7 @@ public static class MauiProgram
         DependencyService.RegisterSingleton<IJwtService>(new JwtService());
         DependencyService.RegisterSingleton<IAccountService>(new AccountService());
         DependencyService.RegisterSingleton<IContentService>(new ContentService());
+        DependencyService.RegisterSingleton<ISearchService>(new SearchService());
 
         return builder.Build();
     }

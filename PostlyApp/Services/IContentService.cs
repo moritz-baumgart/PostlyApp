@@ -4,6 +4,6 @@ namespace PostlyApp.Services
 {
     internal interface IContentService
     {
-        public Task<List<PostDTO>> GetPublicFeed(DateTimeOffset? paginationStart);
+        public Task<List<PostDTO>?> GetPublicFeed(DateTimeOffset? paginationStart);
     }
 }

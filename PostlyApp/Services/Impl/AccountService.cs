@@ -107,7 +107,7 @@ namespace PostlyApp.Services.Impl
                 }
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await ShowConnectionError();
                 return null;

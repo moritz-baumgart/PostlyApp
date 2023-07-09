@@ -5,11 +5,12 @@ using System.Web;
 
 namespace PostlyApp.Services.Impl
 {
-    internal class ContentService : IContentService
+    class SearchService : ISearchService
     {
         private readonly HttpClient _client;
+        private readonly JsonSerializerOptions _serializerOptions;
 
-        public ContentService()
+        public SearchService()
         {
 #if DEBUG && ANDROID
             var handlerService = new HttpsClientHandlerService();
@@ -17,28 +18,26 @@ namespace PostlyApp.Services.Impl
 #else
             _client = new HttpClient();
 #endif
+            _serializerOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
         }
 
-
-
-        public async Task<List<PostDTO>?> GetPublicFeed(DateTimeOffset? paginationStart)
+        public async Task<IEnumerable<UserDTO>?> SearchUsers(string username)
         {
-            var uriBuilder = new UriBuilder(Constants.API_BASE + "/feed/public");
-
             try
             {
-                var param = new Dictionary<string, string>();
-                if (paginationStart != null)
+                var uri = ApiUtilities.BuildUri("/search", new()
                 {
-                    param.Add("paginationStart", ((DateTimeOffset)paginationStart).ToString("o"));
-                }
-
-                var uri = ApiUtilities.BuildUri("/feed/public", param);
-                var res = await _client.GetAsync(uriBuilder.ToString());
+                    { "username", username }
+                });
+                var res = await _client.GetAsync(uri);
 
                 if (res.IsSuccessStatusCode)
                 {
-                    return await ApiUtilities.DecodeJsonResponse<List<PostDTO>>(res);
+                    return await ApiUtilities.DecodeJsonResponse<IEnumerable<UserDTO>>(res);
                 }
                 else
                 {
