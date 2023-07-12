@@ -51,6 +51,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\cake.svg" />
+	  <None Remove="Resources\Images\calendar.svg" />
+	  <None Remove="Resources\Images\comment.svg" />
+	  <None Remove="Resources\Images\thumbsdown.svg" />
+	  <None Remove="Resources\Images\thumbsup.svg" />
+	  <None Remove="Resources\Images\user.svg" />
+	  <None Remove="Resources\Images\userprofile.svg" />
+	  <None Remove="Resources\Images\venusmars.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />

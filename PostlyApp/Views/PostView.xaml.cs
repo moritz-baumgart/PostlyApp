@@ -27,9 +27,9 @@ public partial class PostView : ContentView
             }
             postView.date.Text = postView.Post.CreatedAt.ToLocalTime().ToString();
             postView.content.Text = postView.Post.Content;
-            postView.UpvoteCount.Text = "Up: " + postView.Post.UpvoteCount.ToString();
-            postView.DownvoteCount.Text = "  Down: " + postView.Post.DownvoteCount.ToString();
-            postView.CommentCount.Text = "  Comments: " + postView.Post.CommentCount.ToString();
+            postView.UpvoteCount.Text =  "" + postView.Post.UpvoteCount.ToString();
+            postView.DownvoteCount.Text = "" + postView.Post.DownvoteCount.ToString();
+            postView.CommentCount.Text = "" + postView.Post.CommentCount.ToString();
         }
     }
 

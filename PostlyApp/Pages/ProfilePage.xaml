@@ -36,7 +36,7 @@
                     HeightRequest="50"
                     WidthRequest="50"
                     HorizontalOptions="Start">
-                <Image Source="usersolid.svg"
+                <Image Source="userprofile.png"
                        Aspect="Center"
                        HeightRequest="30"
                        WidthRequest="30"/>
@@ -54,6 +54,10 @@
                    Grid.ColumnSpan="2"
                    Text="{Binding UserProfile.Username}"
                    Style="{x:StaticResource LightLabel}"/>
+
+            
+            
+            
 
             <HorizontalStackLayout Grid.Row="3"
                                    Grid.ColumnSpan="2"
@@ -74,6 +78,46 @@
                        Style="{x:StaticResource LightLabel}"
                        Margin="5, 0, 0, 0"/>
             </HorizontalStackLayout>
+
+
+
+
+            <VerticalStackLayout Grid.Row="3"
+                                   Grid.ColumnSpan="2"
+                                   Margin="0, 20, 0, 0">
+                
+                <Label Grid.Row="4" Text="Profileinfo" FontAttributes="Bold"/>
+                
+                <HorizontalStackLayout>
+                    <Image Source="venusmars.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
+                <Label Text="{Binding UserProfile.Gender}"
+                       Style="{x:StaticResource LightLabel}"
+                       Margin="4, 0, 0, 0" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Image Source="cake.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
+                    <Label Text="{Binding UserProfile.Birthday}"
+                       Style="{x:StaticResource LightLabel}"
+                       Margin="4, 0, 0, 0" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Image Source="user.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
+                    <Label Text="{Binding UserProfile.Role}"
+                       Style="{x:StaticResource LightLabel}"
+                       Margin="4, 0, 0, 0" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Image Source="calendar.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
+                    <Label Text="{Binding UserProfile.CreatedAt}"
+                       Style="{x:StaticResource LightLabel}"
+                       Margin="4, 0, 0, 0" />
+                </HorizontalStackLayout>
+                
+                
+            </VerticalStackLayout>
 
             <Grid>
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="End">

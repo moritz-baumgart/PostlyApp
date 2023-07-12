@@ -4,7 +4,7 @@
              x:Class="PostlyApp.Pages.LoginPage"
              Title="Login">
     <VerticalStackLayout Margin="25,25,25,25">
-        <Image Source="logo.svg" Margin="25,50,25,75"/>
+        <Image Source="logo.png" Margin="25,50,25,75"/>
         <Label Text="Username"/>
         <Entry x:Name="UsernameEntry" Margin="0,0,0,8"/>
         <Label Text="Password"/>
