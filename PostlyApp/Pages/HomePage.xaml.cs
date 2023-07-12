@@ -1,4 +1,6 @@
 using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Views;
+using MauiToolkitPopupSample;
 using PostlyApp.Services;
 
 namespace PostlyApp.Pages;
@@ -45,4 +47,11 @@ public partial class HomePage : ContentPage
         }
         loadMorePublicBtn.IsEnabled = true;
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        this.ShowPopup(new PopupPage());
+    }
+
+  
 }
