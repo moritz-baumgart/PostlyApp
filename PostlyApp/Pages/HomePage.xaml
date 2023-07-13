@@ -9,9 +9,10 @@
     <!-- For now lets just add e.g. the public feed: -->
 
     <Shell.TitleView>
-        <StackLayout>
-            <Button Text="Post"  VerticalOptions="Center" HorizontalOptions="End" />
-        </StackLayout>
+        <HorizontalStackLayout Spacing="200">
+            <Label Text="Home" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Start"/>
+            <Button Text="Post"  VerticalOptions="Center" HorizontalOptions="End" Clicked="Button_Clicked" />
+        </HorizontalStackLayout>
     </Shell.TitleView>
 
 

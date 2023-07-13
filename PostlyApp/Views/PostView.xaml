@@ -6,9 +6,13 @@
         <Label x:Name="author" FontAttributes="Bold" FontSize="17"/>
         <Label x:Name="date" FontSize="13" TextColor="Grey"/>
         <Label x:Name="content" FontSize="15"/>
-        <HorizontalStackLayout>
+        
+        <HorizontalStackLayout Spacing="10">
+            <Image Source="thumbsup.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
             <Label x:Name="UpvoteCount" />
+            <Image Source="thumbsdown.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
             <Label x:Name="  DownvoteCount" />
+            <Image Source="comment.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20"  />
             <Label x:Name="  CommentCount" />
         </HorizontalStackLayout>
     </VerticalStackLayout>
