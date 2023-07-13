@@ -70,4 +70,6 @@ public partial class HomePage : ContentPage
     {
         this.ShowPopup(new NewPostPopup());
     }
+
+    
 }
