@@ -44,6 +44,11 @@ public partial class AppShell : Shell, INotifyPropertyChanged
         }
     }
 
+    private void OnRegisterClicked(object sender, EventArgs e)
+    {
+        
+    }
+
     private void OnLogoutClicked(object sender, EventArgs e)
     {
         _account.Logout();

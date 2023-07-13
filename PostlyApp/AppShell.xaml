@@ -17,6 +17,15 @@
         Shell.FlyoutBehavior="Disabled"
         ContentTemplate="{DataTemplate pages:LoginPage}">
     </ShellContent>
+    
+    <ShellContent
+        x:Name="PostlyRegisterPage"
+        Title="Create an Account"
+        Route="Register"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"
+        ContentTemplate="{DataTemplate pages:RegisterPage}">
+    </ShellContent>
 
     <ShellContent
         x:Name="PostlyHomePage"

@@ -46,4 +46,5 @@ public partial class LoginPage : ContentPage
 
         LoginBtn.IsEnabled = true;
     }
+
 }

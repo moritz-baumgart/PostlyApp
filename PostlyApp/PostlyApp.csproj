@@ -60,6 +60,9 @@
 		<Compile Update="Pages\LoginPage.xaml.cs">
 			<DependentUpon>LoginPage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Pages\RegisterPage.xaml.cs">
+		  <DependentUpon>RegisterPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,6 +73,9 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\ProfilePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\RegisterPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\SearchPage.xaml">
