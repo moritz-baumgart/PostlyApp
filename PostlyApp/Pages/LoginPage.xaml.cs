@@ -47,4 +47,8 @@ public partial class LoginPage : ContentPage
         LoginBtn.IsEnabled = true;
     }
 
+    private async void OnRegisterClicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync("//Register");
+    }
 }

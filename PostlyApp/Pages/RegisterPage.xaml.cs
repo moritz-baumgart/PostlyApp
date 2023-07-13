@@ -11,4 +11,8 @@ public partial class RegisterPage : ContentPage
         InitializeComponent();
     }
     
+    private async void OnSigninClicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync("//Login");
+    }
 }

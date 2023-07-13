@@ -10,7 +10,9 @@
         <Label Text="Password"/>
         <Entry x:Name="PasswordEntry" MaxLength="8" IsPassword="True"/>
         <Button x:Name="LoginBtn" Text="Login" Margin="0,25,0,0" Clicked="OnLoginClicked"></Button>
-        <Label Text="New here?" VerticalOptions="Center"/>
-        <Button x:Name="RegisterBtn" Text="Create an Account!" Margin="0,25,0,0"></Button>
+        <Label Text=" "/>
+        <!-- ^ ist nur für die Formatierung, bitte nicht ablenken lassen-->
+        <Label Text="New here?" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <Button x:Name="RegisterBtn" Text="Create an Account!" Margin="0,25,0,0" Clicked="OnRegisterClicked"></Button>
     </VerticalStackLayout>
 </ContentPage>

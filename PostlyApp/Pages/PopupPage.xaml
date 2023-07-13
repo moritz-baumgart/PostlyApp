@@ -4,16 +4,16 @@
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
              x:Class="MauiToolkitPopupSample.PopupPage"
              CanBeDismissedByTappingOutsideOfPopup="False"
-            Size="300, 200">
-    <VerticalStackLayout BackgroundColor="DimGrey">
+            Size="200, 220">
+    <VerticalStackLayout BackgroundColor="#282936">
         <Label 
-            Text="Let's Post something!"
+            Text="Post!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Entry x:Name="entry"
-               Placeholder="Enter Text"
+               Placeholder="Time to share..."
                HorizontalOptions="Center"
-               MaxLength="255"
+               MaxLength="282"
                MinimumHeightRequest="150"
                MinimumWidthRequest="150"
               />
