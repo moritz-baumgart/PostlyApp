@@ -26,8 +26,8 @@
                MaxLength="282"
                HeightRequest="100"/>
         <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
-            <Button Text="Comment" BackgroundColor="{StaticResource Gray500}" />
             <Button Text="Discard" BackgroundColor="PaleVioletRed" Clicked="Button_Clicked" Grid.Column="3" />
+            <Button Text="Comment" BackgroundColor="{StaticResource Gray500}" />
         </Grid>
 
     </VerticalStackLayout>

@@ -69,9 +69,3 @@ public partial class ProfilePage : ContentPage
             UserProfile = await _account.GetUserProfile(null);
         }
     }
-
-    private void Button_Clicked(object sender, EventArgs e)
-    {
-        this.ShowPopup(new PostdetailView());
-    }
-}
