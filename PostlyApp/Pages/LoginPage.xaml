@@ -6,9 +6,9 @@
     <VerticalStackLayout Margin="25,25,25,25">
         <Image Source="logo.png" Margin="25,50,25,75"/>
         <Label Text="Username"/>
-        <Entry x:Name="UsernameEntry" MaxLength="10" Margin="0,0,0,8"/>
+        <Entry x:Name="UsernameEntry" Margin="0,0,0,8"/>
         <Label Text="Password"/>
-        <Entry x:Name="PasswordEntry" MaxLength="8" IsPassword="True"/>
+        <Entry x:Name="PasswordEntry" IsPassword="True"/>
         <Button x:Name="LoginBtn" Text="Login" Margin="0,25,0,0" Clicked="OnLoginClicked"></Button>
         <Label Text=" "/>
         <!-- ^ ist nur für die Formatierung, bitte nicht ablenken lassen-->

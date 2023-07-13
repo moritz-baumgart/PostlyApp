@@ -4,13 +4,15 @@
              x:Class="PostlyApp.Pages.RegisterPage"
              Title="Register">
     <VerticalStackLayout Margin="25,25,25,25">
-        <Image Source="logo.svg" Margin="25,50,25,75"/>
+        <Image Source="logo.png" Margin="25,50,25,75"/>
         <Label Text="Username"/>
-        <Entry x:Name="FirstUsernameEntry" MaxLength="10" Margin="0,0,0,8"/>
+        <Entry x:Name="Username" Margin="0,0,0,8"/>
         <Label Text="Password"/>
-        <Entry x:Name="CompainPasswordEntry" MaxLength="8" IsPassword="True" Margin="0,0,0,8"/>
+        <Entry x:Name="PW1" IsPassword="True" Margin="0,0,0,8"/>
+        <Label Text="Repeat password"/>
+        <Entry x:Name="PW2" IsPassword="True" Margin="0,0,0,8"/>
         <!--Neuer Nutzer muss in die Datenbank hinterlegt werden?-->
-        <Button x:Name="Create" Text="Create" Margin="0,25,0,0" ></Button>
+        <Button x:Name="Create" Text="Create" Margin="0,25,0,0" Clicked="Create_Clicked"></Button>
         <Label Text=" "/> <!--ist nur für die Formatierung, bitte nicht ablenken lassen-->
         <Label Text="Already have an Account?" VerticalOptions="Center" HorizontalOptions="Center"/>
         <Button x:Name="Signin" Text="Login" Margin="0,25,0,0" Clicked="OnSigninClicked"></Button>
