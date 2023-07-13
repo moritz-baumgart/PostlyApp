@@ -2,31 +2,43 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:PostlyApp.Views"
+             xmlns:plyvm="clr-namespace:PostlyApp.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="PostlyApp.Pages.HomePage"
+             x:DataType="plyvm:HomePageViewModel"
              Title="Home">
 
     <!-- Here we have to distinct in some sort of tab view between public and following feed -->
     <!-- For now lets just add e.g. the public feed: -->
 
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    </ContentPage.Resources>
+    
     <Shell.TitleView>
-        <Grid HorizontalOptions="Fill">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Label Text="Home" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Margin="10,0,0,0"/>
-
-            <Button Text="Post"  VerticalOptions="Center" HorizontalOptions="End" Clicked="Button_Clicked" Margin="0,0,0,10"/>
-        </Grid>
+        <FlexLayout JustifyContent="SpaceBetween" Margin="20,0,20,0">
+            <Label Text="Home" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center"/>
+            <Button Text="Post"  VerticalOptions="Center" Clicked="NewPostClicked"/>
+        </FlexLayout>
     </Shell.TitleView>
 
 
     <ScrollView VerticalScrollBarVisibility="Always">
-        <StackLayout>
-            <views:PostlistView x:Name="publicFeed" Margin="20,20,20,20"></views:PostlistView>
-            <Button x:Name="loadMorePublicBtn" IsVisible="false" HorizontalOptions="Center" Text="Load more" Clicked="OnLoadMorePublic" Margin="0,0,0,25"></Button>
-        </StackLayout>
-    </ScrollView>
+        <VerticalStackLayout Margin="20">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="40" Margin="0,0,0,20">
+                <Button Text="Recommended" Clicked="RecBtnClicked" IsEnabled="{Binding Tab0Visible, Converter={StaticResource InvertedBoolConverter}}"></Button>
+                <Button Text="Following" Clicked="FollowBtnClicked" IsEnabled="{Binding Tab1Visible, Converter={StaticResource InvertedBoolConverter}}"></Button>
+            </HorizontalStackLayout>
 
+            <StackLayout IsVisible="{Binding Tab0Visible}">
+                <views:PostlistView x:Name="publicFeed"></views:PostlistView>
+                <Button x:Name="loadMorePublicBtn" IsVisible="false" HorizontalOptions="Center" Text="Load more" Clicked="OnLoadMorePublic" Margin="0,20,0,0"></Button>
+            </StackLayout>
+            
+            <StackLayout IsVisible="{Binding Tab1Visible}">
+                <views:PostlistView x:Name="privateFeed"></views:PostlistView>
+                <Button x:Name="loadMorePrivateBtn" IsVisible="false" HorizontalOptions="Center" Text="Load more" Clicked="OnLoadMorePrivate" Margin="0,20,0,0"></Button>
+            </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

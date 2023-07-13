@@ -1,5 +1,7 @@
+using CommunityToolkit.Maui.Alerts;
 using PostlyApp.Models.DTOs;
 using PostlyApp.Services;
+using PostlyApp.ViewModels;
 
 namespace PostlyApp.Pages;
 
@@ -18,26 +20,17 @@ public partial class ProfilePage : ContentPage
         }
     }
 
-    UserProfileViewModel? userProfile;
-    public UserProfileViewModel? UserProfile
-    {
-        get => userProfile;
-        set
-        {
-            userProfile = value;
-            OnPropertyChanged();
-        }
-    }
-
     private readonly IJwtService _jwt;
     private readonly IAccountService _account;
+    private readonly IContentService _content;
 
     public ProfilePage()
     {
         InitializeComponent();
-        BindingContext = this;
+        BindingContext = new ProfilePageViewModel();
         _jwt = DependencyService.Resolve<IJwtService>();
         _account = DependencyService.Resolve<IAccountService>();
+        _content = DependencyService.Resolve<IContentService>();
     }
 
     protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
@@ -58,13 +51,80 @@ public partial class ProfilePage : ContentPage
 
     private async Task FetchCurrentUser()
     {
-        if (username != null && !username.Equals(_jwt.GetUserName()))
+        if (BindingContext is ProfilePageViewModel viewModel)
         {
-            UserProfile = await _account.GetUserProfile(username);
+
+            if (username != null && !username.Equals(_jwt.GetUserName()))
+            {
+                viewModel.UserProfile = await _account.GetUserProfile(username);
+                viewModel.FollowBtnVisible = true;
+            }
+            else
+            {
+                viewModel.UserProfile = await _account.GetUserProfile(null);
+                viewModel.FollowBtnVisible = false;
+            }
+            profileFeed.Posts = await _content.GetProfileFeed(username, null);
+            loadMoreBtnProfile.IsVisible = true;
         }
-        else
+    }
+
+    private async void OnLoadMoreProfile(object sender, EventArgs e)
+    {
+        loadMoreBtnProfile.IsEnabled = false;
+        var lastPost = profileFeed.Posts.LastOrDefault();
+        if (lastPost != null)
         {
-            UserProfile = await _account.GetUserProfile(null);
+            var newPosts = await _content.GetProfileFeed(username, lastPost.CreatedAt);
+            if (newPosts == null)
+            {
+                var toast = Toast.Make("Error while loading more posts!");
+                await toast.Show();
+                return;
+            }
+            if (newPosts.Count == 0)
+            {
+                var toast = Toast.Make("No more posts to load!");
+                await toast.Show();
+                return;
+            }
+            newPosts.InsertRange(0, profileFeed.Posts);
+            profileFeed.Posts = newPosts;
         }
+        loadMoreBtnProfile.IsEnabled = true;
+    }
+
+    private async void FollowBtnClicked(object sender, EventArgs e)
+    {
+        followBtn.IsEnabled = false;
+
+        if (BindingContext is ProfilePageViewModel viewModel)
+        {
+            var follow = viewModel.UserProfile?.Follow;
+            if (viewModel.UserProfile != null && follow != null)
+            {
+                UserProfileViewModel? newProfile;
+                if ((bool)follow)
+                {
+                    newProfile = await _account.UnfollowUser(viewModel.UserProfile.Username);
+                }
+                else
+                {
+                    newProfile = await _account.FollowUser(viewModel.UserProfile.Username);
+                }
+
+                if (newProfile != null)
+                {
+                    viewModel.UserProfile = newProfile;
+                }
+                else
+                {
+                    var toast = Toast.Make("Error submitting your follow/unfollow");
+                    await toast.Show();
+                }
+            }
+        }
+
+        followBtn.IsEnabled = true;
     }
 }

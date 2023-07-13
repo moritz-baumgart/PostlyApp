@@ -2,7 +2,7 @@
 
 namespace PostlyApp.Models.DTOs
 {
-    public class UserProfileViewModel
+    public partial class UserProfileViewModel
     {
         public long Id { get; set; }
         public DateTimeOffset CreatedAt { get; set; }

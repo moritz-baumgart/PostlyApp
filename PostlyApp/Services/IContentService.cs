@@ -6,6 +6,8 @@ namespace PostlyApp.Services
     internal interface IContentService
     {
         public Task<List<PostDTO>?> GetPublicFeed(DateTimeOffset? paginationStart);
+        public Task<List<PostDTO>?> GetPrivateFeed(DateTimeOffset? paginationStart);
+        public Task<List<PostDTO>?> GetProfileFeed(string? username, DateTimeOffset? paginationStart);
         public Task<VoteUpdateViewModel?> SetVote(int postId, VoteType voteType);
         public Task<VoteUpdateViewModel?> RemoveVote(int postId);
 

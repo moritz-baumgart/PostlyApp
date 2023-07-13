@@ -86,8 +86,6 @@ namespace PostlyApp.Services.Impl
 
         public async Task<List<PostDTO>?> GetPublicFeed(DateTimeOffset? paginationStart)
         {
-            var uriBuilder = new UriBuilder(Constants.API_BASE + "/feed/public");
-
             try
             {
                 var param = new Dictionary<string, string>();
@@ -97,7 +95,64 @@ namespace PostlyApp.Services.Impl
                 }
 
                 var uri = ApiUtilities.BuildUri("/feed/public", param);
-                var res = await _client.GetAsync(uriBuilder.ToString());
+                var res = await _client.GetAsync(uri.ToString());
+
+                if (res.IsSuccessStatusCode)
+                {
+                    return await ApiUtilities.DeserializeJsonResponse<List<PostDTO>>(res);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+
+        public async Task<List<PostDTO>?> GetPrivateFeed(DateTimeOffset? paginationStart)
+        {
+            try
+            {
+                var param = new Dictionary<string, string>();
+                if (paginationStart != null)
+                {
+                    param.Add("paginationStart", ((DateTimeOffset)paginationStart).ToString("o"));
+                }
+
+                var uri = ApiUtilities.BuildUri("/feed/private", param);
+                var res = await _client.GetAsync(uri.ToString());
+
+                if (res.IsSuccessStatusCode)
+                {
+                    return await ApiUtilities.DeserializeJsonResponse<List<PostDTO>>(res);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<PostDTO>?> GetProfileFeed(string? username, DateTimeOffset? paginationStart)
+        {
+            try
+            {
+                var param = new Dictionary<string, string>();
+                if (paginationStart != null)
+                {
+                    param.Add("paginationStart", ((DateTimeOffset)paginationStart).ToString("o"));
+                }
+
+                var uri = ApiUtilities.BuildUri("/feed/public", param);
+                var res = await _client.GetAsync(uri.ToString());
 
                 if (res.IsSuccessStatusCode)
                 {

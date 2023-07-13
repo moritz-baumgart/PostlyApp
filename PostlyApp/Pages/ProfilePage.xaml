@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:plyvm="clr-namespace:PostlyApp.ViewModels"
+             xmlns:views="clr-namespace:PostlyApp.Views"
+             xmlns:converter="clr-namespace:PostlyApp.Converter"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="PostlyApp.Pages.ProfilePage"
-             Title="Profile"
-             Padding="30">
+             x:DataType="plyvm:ProfilePageViewModel"
+             Title="Profile">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -20,15 +24,21 @@
             </Style>
 
         </ResourceDictionary>
+        <converter:GenderEnumToVisibilityConverter x:Key="GenderEnumToVisibilityConverter"/>
+        <converter:DateTimeOffsetToDateOnlyConverter x:Key="DateTimeOffsetToDateOnlyConverter"/>
+        <toolkit:DateTimeOffsetConverter x:Key="DateTimeOffsetConverter" />
+        <toolkit:IsNotNullConverter  x:Key="IsNotNullConverter" />
     </ContentPage.Resources>
 
-    <Grid Padding="0,0,0,1">
-        <Grid ColumnDefinitions="*, Auto"
+    <ScrollView>
+        <VerticalStackLayout Margin="20">
+            <Grid Padding="0,0,0,1">
+                <Grid ColumnDefinitions="*, Auto"
               RowDefinitions="Auto, Auto, Auto, Auto"
               BackgroundColor="#1d1e27"
               Padding="0, 0, 0, 30">
 
-            <Border Grid.Row="0"
+                    <Border Grid.Row="0"
                     Grid.Column="0"
                     Stroke="White"
                     StrokeThickness="1"
@@ -36,13 +46,13 @@
                     HeightRequest="50"
                     WidthRequest="50"
                     HorizontalOptions="Start">
-                <Image Source="userprofile.png"
+                        <Image Source="userprofile.png"
                        Aspect="Center"
                        HeightRequest="30"
                        WidthRequest="30"/>
-            </Border>
+                    </Border>
 
-            <Label Grid.Row="1"
+                    <Label Grid.Row="1"
                    Grid.ColumnSpan="2"
                    Text="{Binding UserProfile.DisplayName}"
                    FontAttributes="Bold"
@@ -50,81 +60,86 @@
                    TextColor="White"
                    Margin="0, 20, 0, 0"/>
 
-            <Label Grid.Row="2"
+                    <Label Grid.Row="2"
                    Grid.ColumnSpan="2"
-                   Text="{Binding UserProfile.Username}"
-                   Style="{x:StaticResource LightLabel}"/>
-
-            
-            
-            
-
-            <HorizontalStackLayout Grid.Row="2"
-                                   Grid.ColumnSpan="2"
-                                   Margin="0, 20, 0, 0">
-
-                <Label Text="{Binding UserProfile.FollowingCount}" 
-                       Style="{x:StaticResource FollowCount}"  />
-
-                <Label Text="Following"
-                       Style="{x:StaticResource LightLabel}"
-                       Margin="5, 0, 0, 0"/>
-
-                <Label Text="{Binding UserProfile.FollowerCount}" 
-                       Style="{x:StaticResource FollowCount}"
-                       Margin="20, 0, 0, 0"/>
-
-                <Label Text="Follower"
-                       Style="{x:StaticResource LightLabel}"
-                       Margin="5, 0, 0, 0"/>
-            </HorizontalStackLayout>
+                   Style="{x:StaticResource LightLabel}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="@" />
+                                <Span Text="{Binding UserProfile.Username}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
 
+                    <HorizontalStackLayout Grid.Row="2"
+                                           Grid.ColumnSpan="2"
+                                           Margin="0, 20, 0, 0">
+
+                        <Label Text="{Binding UserProfile.FollowingCount}" 
+                                Style="{x:StaticResource FollowCount}"  />
+
+                        <Label Text="Following"
+                               Style="{x:StaticResource LightLabel}"
+                               Margin="5, 0, 0, 0"/>
+
+                        <Label Text="{Binding UserProfile.FollowerCount}" 
+                               Style="{x:StaticResource FollowCount}"
+                               Margin="20, 0, 0, 0"/>
+
+                        <Label Text="Follower"
+                               Style="{x:StaticResource LightLabel}"
+                               Margin="5, 0, 0, 0"/>
+                    </HorizontalStackLayout>
 
 
-            <VerticalStackLayout Grid.Row="3"
-                                   Grid.ColumnSpan="2"
-                                   Margin="0, 20, 0, 0">
-                
-                <Label Grid.Row="5" Text="Profileinfo" FontAttributes="Bold"/>
-                
-                <HorizontalStackLayout>
-                    <Image Source="venusmars.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
-                <Label Text="{Binding UserProfile.Gender}"
-                       Style="{x:StaticResource LightLabel}"
-                       Margin="4, 0, 0, 0" />
-                </HorizontalStackLayout>
 
-                <HorizontalStackLayout>
-                    <Image Source="cake.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
-                    <Label Text="{Binding UserProfile.Birthday}"
-                       Style="{x:StaticResource LightLabel}"
-                       Margin="4, 0, 0, 0" />
-                </HorizontalStackLayout>
 
-                <HorizontalStackLayout>
-                    <Image Source="user.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
-                    <Label Text="{Binding UserProfile.Role}"
-                       Style="{x:StaticResource LightLabel}"
-                       Margin="4, 0, 0, 0" />
-                </HorizontalStackLayout>
+                    <VerticalStackLayout Grid.Row="3"
+                                         Grid.ColumnSpan="2"
+                                         Margin="0, 20, 0, 0"
+                                         Spacing="5">
 
-                <HorizontalStackLayout>
-                    <Image Source="calendar.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
-                    <Label Text="{Binding UserProfile.CreatedAt}"
-                       Style="{x:StaticResource LightLabel}"
-                       Margin="4, 0, 0, 0" />
-                </HorizontalStackLayout>
-                
-                
-            </VerticalStackLayout>
+                        <Label Grid.Row="5" Text="Profileinfo" FontAttributes="Bold"/>
 
-            <Grid>
-                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="End">
-                    <Button Text="Follow" BackgroundColor="#b19df7" TextColor="White"></Button>
-                </VerticalStackLayout>
+                        <HorizontalStackLayout IsVisible="{Binding UserProfile.Gender, Converter={StaticResource GenderEnumToVisibilityConverter}}">
+                            <Image Source="venusmars.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
+                            <Label Text="{Binding UserProfile.Gender}"
+                                   Style="{x:StaticResource LightLabel}"
+                                   Margin="5, 0, 0, 0" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout IsVisible="{Binding UserProfile.Birthday, Converter={StaticResource IsNotNullConverter}}">
+                            <Image Source="cake.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
+                            <Label Text="{Binding UserProfile.Birthday, Converter={StaticResource DateTimeOffsetToDateOnlyConverter}}"
+                                   Style="{x:StaticResource LightLabel}"
+                                   Margin="5, 0, 0, 0" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout>
+                            <Image Source="calendar.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" />
+                            <Label Text="{Binding UserProfile.CreatedAt, Converter={StaticResource DateTimeOffsetToDateOnlyConverter}}"
+                                   Style="{x:StaticResource LightLabel}"
+                                   Margin="5, 0, 0, 0" />
+                        </HorizontalStackLayout>
+
+
+                    </VerticalStackLayout>
+
+                    <Grid>
+                        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="End">
+                            <Button x:Name="followBtn"
+                                    IsVisible="{Binding FollowBtnVisible}"
+                                    Text="{Binding FollowBtnText}" BackgroundColor="{StaticResource primary-color}"
+                                    TextColor="{StaticResource primary-color-text}"
+                                    Clicked="FollowBtnClicked"></Button>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Grid>
             </Grid>
-        </Grid>
-    </Grid>
+            <views:PostlistView x:Name="profileFeed" Margin="0,0,0,20"></views:PostlistView>
+            <Button x:Name="loadMoreBtnProfile" IsVisible="false" HorizontalOptions="Center" Text="Load more" Clicked="OnLoadMoreProfile"></Button>
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>

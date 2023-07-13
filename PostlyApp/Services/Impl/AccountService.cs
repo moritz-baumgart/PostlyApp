@@ -159,5 +159,48 @@ namespace PostlyApp.Services.Impl
             var toast = Toast.Make("Error connecting to server. Try again later!", ToastDuration.Long);
             await toast.Show();
         }
+
+        public Task<UserProfileViewModel?> FollowUser(string username)
+        {
+            return ChangeFollow(username, true);
+        }
+
+        public Task<UserProfileViewModel?> UnfollowUser(string username)
+        {
+            return ChangeFollow(username, false);
+        }
+
+        private async Task<UserProfileViewModel?> ChangeFollow(string username, bool isFollow)
+        {
+            var uriBuilder = new UriBuilder(Constants.API_BASE + $"/account/me/following/{username}");
+
+            try
+            {
+                HttpResponseMessage res;
+                if (isFollow)
+                {
+                    res = await _client.PostAsync(uriBuilder.ToString(), null);
+                }
+                else
+                {
+                    res = await _client.DeleteAsync(uriBuilder.ToString());
+                }
+
+                if (res.IsSuccessStatusCode)
+                {
+                    return await ApiUtilities.DeserializeJsonResponse<UserProfileViewModel>(res);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+
+        }
     }
 }

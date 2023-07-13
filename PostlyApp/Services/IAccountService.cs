@@ -8,5 +8,7 @@ namespace PostlyApp.Services
         public Task<bool?> Login(string username, string password);
         public void Logout();
         public Task<UserProfileViewModel?> GetUserProfile(string? username);
+        public Task<UserProfileViewModel?> FollowUser(string username);
+        public Task<UserProfileViewModel?> UnfollowUser(string username);
     }
 }
