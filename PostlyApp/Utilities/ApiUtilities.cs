@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace PostlyApp.Utilities
@@ -29,10 +25,16 @@ namespace PostlyApp.Utilities
             return uriBuilder.ToString();
         }
 
-        public static async Task<T?> DecodeJsonResponse<T>(HttpResponseMessage response)
+        public static async Task<T?> DeserializeJsonResponse<T>(HttpResponseMessage response)
         {
             var content = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(content, _serializerOptions);
+        }
+
+        public static StringContent SerializeJsonBody<T>(T body)
+        {
+            string json = JsonSerializer.Serialize(body, _serializerOptions);
+            return new StringContent(json, Encoding.UTF8, "application/json");
         }
     }
 }

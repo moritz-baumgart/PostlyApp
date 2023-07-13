@@ -10,7 +10,7 @@
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
-		
+
 		<!-- enable nullabitlity -->
 		<Nullable>enable</Nullable>
 
@@ -51,20 +51,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\cake.svg" />
-	  <None Remove="Resources\Images\calendar.svg" />
-	  <None Remove="Resources\Images\comment.svg" />
-	  <None Remove="Resources\Images\thumbsdown.svg" />
-	  <None Remove="Resources\Images\thumbsup.svg" />
-	  <None Remove="Resources\Images\user.svg" />
-	  <None Remove="Resources\Images\userprofile.svg" />
-	  <None Remove="Resources\Images\venusmars.svg" />
+	  <MauiImage Remove="Resources\Images\user.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Resources\Images\cake.svg" />
+		<None Remove="Resources\Images\calendar.svg" />
+		<None Remove="Resources\Images\comment.svg" />
+		<None Remove="Resources\Images\thumbsdown.svg" />
+		<None Remove="Resources\Images\thumbsup.svg" />
+		<None Remove="Resources\Images\user.svg" />
+		<None Remove="Resources\Images\userprofile.svg" />
+		<None Remove="Resources\Images\venusmars.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Images\user.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -72,7 +81,10 @@
 			<DependentUpon>LoginPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Pages\RegisterPage.xaml.cs">
-		  <DependentUpon>RegisterPage.xaml</DependentUpon>
+			<DependentUpon>RegisterPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\NewPostPopup.xaml.cs">
+			<DependentUpon>NewPostPopup.xaml</DependentUpon>
 		</Compile>
 	</ItemGroup>
 
@@ -83,17 +95,17 @@
 		<MauiXaml Update="Pages\LoginPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Pages\PopupPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+		<MauiXaml Update="Views\NewPostPopup.xaml">
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\ProfilePage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\RegisterPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Pages\SearchPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\PostlistView.xaml">
 			<Generator>MSBuild:Compile</Generator>

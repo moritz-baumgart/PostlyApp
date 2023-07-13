@@ -37,7 +37,7 @@ namespace PostlyApp.Services.Impl
 
                 if (res.IsSuccessStatusCode)
                 {
-                    return await ApiUtilities.DecodeJsonResponse<IEnumerable<UserDTO>>(res);
+                    return await ApiUtilities.DeserializeJsonResponse<IEnumerable<UserDTO>>(res);
                 }
                 else
                 {
