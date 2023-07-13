@@ -1,3 +1,5 @@
+using CommunityToolkit.Maui.Views;
+using MauiToolkitPopupSample;
 using PostlyApp.Models.DTOs;
 using PostlyApp.Services;
 
@@ -66,5 +68,10 @@ public partial class ProfilePage : ContentPage
         {
             UserProfile = await _account.GetUserProfile(null);
         }
+    }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        this.ShowPopup(new PostdetailView());
     }
 }

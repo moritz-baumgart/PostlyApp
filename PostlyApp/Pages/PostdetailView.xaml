@@ -19,18 +19,16 @@
             <Image Source="comment.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20"  />
             <Label x:Name="  CommentCount" />
         </HorizontalStackLayout>
-            
-            <Entry x:Name="Postdetailview"
+
+        <Editor HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+               x:Name="Postdetailview"
                Placeholder="Leave a Comment..."
-               HorizontalOptions="Center"
                MaxLength="282"
-               MinimumHeightRequest="150"
-               MinimumWidthRequest="150"
-              />
-        <HorizontalStackLayout>
-            <Button Text="Comment" BackgroundColor="LightGreen" />
-            <Button Text="Discard" BackgroundColor="PaleVioletRed" Clicked="Button_Clicked" />
-        </HorizontalStackLayout>
+               HeightRequest="100"/>
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
+            <Button Text="Comment" BackgroundColor="{StaticResource Gray500}" />
+            <Button Text="Discard" BackgroundColor="PaleVioletRed" Clicked="Button_Clicked" Grid.Column="3" />
+        </Grid>
 
     </VerticalStackLayout>
 </mct:Popup>

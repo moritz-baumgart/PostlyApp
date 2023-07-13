@@ -127,4 +127,5 @@
         </Grid>
     </Grid>
 
+    <Button Text="Detail" Clicked="Button_Clicked" />
 </ContentPage>

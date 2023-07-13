@@ -12,7 +12,7 @@
         <Editor  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                     x:Name="newPostText"
                     Placeholder="Enter Text"
-                    MaxLength="288"
+                    MaxLength="282"
                     HeightRequest="100"/>
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
