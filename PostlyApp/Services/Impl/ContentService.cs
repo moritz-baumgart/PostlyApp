@@ -84,6 +84,29 @@ namespace PostlyApp.Services.Impl
 
         }
 
+        public async Task<List<CommentDTO>?> GetComments(long postId)
+        {
+            var uriBuilder = new UriBuilder(Constants.API_BASE + $"/post/{postId}/comments");
+
+            try
+            {
+                var res = await _client.GetAsync(uriBuilder.ToString());
+                if (res.IsSuccessStatusCode)
+                {
+                    return await ApiUtilities.DeserializeJsonResponse<List<CommentDTO>?>(res);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
         public async Task<List<PostDTO>?> GetPublicFeed(DateTimeOffset? paginationStart)
         {
             var uriBuilder = new UriBuilder(Constants.API_BASE + "/feed/public");
