@@ -1,7 +1,4 @@
-using Microsoft.Maui.Controls;
 using PostlyApp.Models.DTOs;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 
 namespace PostlyApp.Views;
 
@@ -30,10 +27,7 @@ public partial class PostlistView : ContentView
             {
                 foreach (var post in view.Posts)
                 {
-                    var postView = new PostView
-                    {
-                        Post = post
-                    };
+                    var postView = new PostView(post);
                     view.postContainer.Add(postView);
                 }
             }

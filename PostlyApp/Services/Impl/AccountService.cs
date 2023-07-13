@@ -94,7 +94,7 @@ namespace PostlyApp.Services.Impl
                 }
 
 
-                return await ApiUtilities.DecodeJsonResponse<UserProfileViewModel>(res);
+                return await ApiUtilities.DeserializeJsonResponse<UserProfileViewModel>(res);
 
             }
             catch (Exception)

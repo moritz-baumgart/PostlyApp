@@ -1,40 +1,80 @@
+using CommunityToolkit.Maui.Alerts;
+using PostlyApp.Enums;
 using PostlyApp.Models.DTOs;
+using PostlyApp.Services;
+using PostlyApp.ViewModels;
 
 namespace PostlyApp.Views;
 
 public partial class PostView : ContentView
 {
 
-    public PostDTO Post
-    {
-        get => (PostDTO)GetValue(PostProperty);
-        set => SetValue(PostProperty, value);
-    }
+    bool voteChangeLoading = false;
+    private readonly IContentService _content;
 
-    public static BindableProperty PostProperty = BindableProperty.Create(nameof(Post), typeof(PostDTO), typeof(PostView), propertyChanged: OnChange);
-
-    private static void OnChange(BindableObject bindable, object oldValue, object newValue)
-    {
-        if (bindable is PostView postView)
-        {
-            if (postView.Post.Author.DisplayName != null && postView.Post.Author.DisplayName.Length > 0)
-            {
-                postView.author.Text = postView.Post.Author.DisplayName + " (@" + postView.Post.Author.Username + ")";
-            }
-            else
-            {
-                postView.author.Text = "@" + postView.Post.Author.Username;
-            }
-            postView.date.Text = postView.Post.CreatedAt.ToLocalTime().ToString();
-            postView.content.Text = postView.Post.Content;
-            postView.UpvoteCount.Text =  "" + postView.Post.UpvoteCount.ToString();
-            postView.DownvoteCount.Text = "" + postView.Post.DownvoteCount.ToString();
-            postView.CommentCount.Text = "" + postView.Post.CommentCount.ToString();
-        }
-    }
-
-    public PostView()
+    public PostView(PostDTO post)
     {
         InitializeComponent();
+        BindingContext = new PostViewViewModel(post);
+        _content = DependencyService.Resolve<IContentService>();
+    }
+
+    private async void UpvoteTapped(object sender, TappedEventArgs e)
+    {
+        if (voteChangeLoading || BindingContext is not PostViewViewModel viewModel)
+        {
+            return;
+        }
+        voteChangeLoading = true;
+
+        if (viewModel.Post.Vote == VoteType.Upvote)
+        {
+            var update = await _content.RemoveVote(viewModel.Post.Id);
+            await UpdateVotes(update, viewModel);
+        }
+        else
+        {
+            var update = await _content.SetVote(viewModel.Post.Id, VoteType.Upvote);
+            await UpdateVotes(update, viewModel);
+        }
+
+        voteChangeLoading = false;
+    }
+
+    private async void DownvoteTapped(object sender, TappedEventArgs e)
+    {
+        if (voteChangeLoading || BindingContext is not PostViewViewModel viewModel)
+        {
+            return;
+        }
+        voteChangeLoading = true;
+
+        if (viewModel.Post.Vote == VoteType.Downvote)
+        {
+            var update = await _content.RemoveVote(viewModel.Post.Id);
+            await UpdateVotes(update, viewModel);
+        }
+        else
+        {
+            var update = await _content.SetVote(viewModel.Post.Id, VoteType.Downvote);
+            await UpdateVotes(update, viewModel);
+        }
+
+        voteChangeLoading = false;
+    }
+
+    private async Task UpdateVotes(VoteUpdateViewModel? update, PostViewViewModel model)
+    {
+        if (update != null)
+        {
+            model.Post.UpvoteCount = update.UpvoteCount;
+            model.Post.DownvoteCount = update.DownvoteCount;
+            model.Post.Vote = update.VoteType;
+        }
+        else
+        {
+            var toast = Toast.Make("Error submitting your vote!");
+            await toast.Show();
+        }
     }
 }

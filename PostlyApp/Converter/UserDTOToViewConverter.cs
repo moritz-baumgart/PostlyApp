@@ -10,7 +10,6 @@ namespace PostlyApp.Converter
             var user = (UserDTO?)value;
             if (user?.DisplayName != null && user.DisplayName.Length > 0)
             {
-
                 return $"{user.DisplayName} (@{user.Username})";
             }
             else
