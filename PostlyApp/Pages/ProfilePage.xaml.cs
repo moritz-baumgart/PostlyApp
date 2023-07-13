@@ -69,3 +69,4 @@ public partial class ProfilePage : ContentPage
             UserProfile = await _account.GetUserProfile(null);
         }
     }
+}

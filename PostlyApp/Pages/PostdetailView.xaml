@@ -6,7 +6,7 @@
              CanBeDismissedByTappingOutsideOfPopup="True">
 
   
-        <VerticalStackLayout BackgroundColor="{StaticResource surface-card}" Padding="10,10,10,10">
+    <VerticalStackLayout BackgroundColor="{StaticResource surface-card}" Padding="10,10,10,10">
             <Label x:Name="author" FontAttributes="Bold" FontSize="14"/>
             <Label x:Name="date" FontSize="10" TextColor="Grey"/>
             <Label x:Name="content" FontSize="12"/>
