@@ -15,7 +15,7 @@ public partial class LoginPage : ContentPage
     }
 
     // TODO: Remove this
-    /*protected override async void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
         var res = await _account.Login("testuser", "IATest1");
@@ -36,7 +36,7 @@ public partial class LoginPage : ContentPage
             }
         }
 
-    }*/
+    }
 
     private async void OnLoginClicked(object sender, EventArgs e)
     {

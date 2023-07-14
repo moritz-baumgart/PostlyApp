@@ -1,4 +1,6 @@
 using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Views;
+using Postly.Views;
 using PostlyApp.Enums;
 using PostlyApp.Models.DTOs;
 using PostlyApp.Services;
@@ -75,6 +77,14 @@ public partial class PostView : ContentView
         {
             var toast = Toast.Make("Error submitting your vote!");
             await toast.Show();
+        }
+    }
+
+    private void CommentsBtnTapped(object sender, TappedEventArgs e)
+    {
+        if (BindingContext is PostViewViewModel viewModel)
+        {
+            Shell.Current.ShowPopup(new PostdetailView(viewModel.Post.Id));
         }
     }
 }

@@ -73,24 +73,32 @@ public partial class ProfilePage : ContentPage
     {
         loadMoreBtnProfile.IsEnabled = false;
         var lastPost = profileFeed.Posts.LastOrDefault();
+        List<PostDTO>? newPosts;
         if (lastPost != null)
         {
-            var newPosts = await _content.GetProfileFeed(username, lastPost.CreatedAt);
-            if (newPosts == null)
-            {
-                var toast = Toast.Make("Error while loading more posts!");
-                await toast.Show();
-                return;
-            }
-            if (newPosts.Count == 0)
-            {
-                var toast = Toast.Make("No more posts to load!");
-                await toast.Show();
-                return;
-            }
-            newPosts.InsertRange(0, profileFeed.Posts);
-            profileFeed.Posts = newPosts;
+            newPosts = await _content.GetProfileFeed(username, lastPost.CreatedAt);
         }
+        else
+        {
+            newPosts = await _content.GetProfileFeed(username, null);
+        }
+
+        if (newPosts == null)
+        {
+            var toast = Toast.Make("Error while loading more posts!");
+            await toast.Show();
+            loadMoreBtnProfile.IsEnabled = true;
+            return;
+        }
+        if (newPosts.Count == 0)
+        {
+            var toast = Toast.Make("No more posts to load!");
+            await toast.Show();
+            loadMoreBtnProfile.IsEnabled = true;
+            return;
+        }
+        newPosts.InsertRange(0, profileFeed.Posts);
+        profileFeed.Posts = newPosts;
         loadMoreBtnProfile.IsEnabled = true;
     }
 

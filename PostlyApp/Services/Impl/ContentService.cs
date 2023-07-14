@@ -174,7 +174,7 @@ namespace PostlyApp.Services.Impl
                     param.Add("paginationStart", ((DateTimeOffset)paginationStart).ToString("o"));
                 }
 
-                var uri = ApiUtilities.BuildUri("/feed/public", param);
+                var uri = ApiUtilities.BuildUri($"/feed/profile/{ username ?? "me" }", param);
                 var res = await _client.GetAsync(uri.ToString());
 
                 if (res.IsSuccessStatusCode)

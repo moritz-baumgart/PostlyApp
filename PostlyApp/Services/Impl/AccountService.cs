@@ -191,6 +191,8 @@ namespace PostlyApp.Services.Impl
 
         }
 
+
+
         /// <summary>
         /// Logs the user out by deleting the JWT and navigating back to the login
         /// </summary>
@@ -247,6 +249,37 @@ namespace PostlyApp.Services.Impl
             }
 
 
+        }
+
+        public async Task<bool?> Register(string username, string password)
+        {
+            var uriBuilder = new UriBuilder(Constants.API_BASE + "/account/register");
+            var body = ApiUtilities.SerializeJsonBody(new LoginOrRegisterRequest
+            {
+                Username = username,
+                Password = password
+            });
+
+            try
+            {
+                var res = await _client.PostAsync(uriBuilder.ToString(), body);
+                if (res.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else if (res.StatusCode == HttpStatusCode.Conflict)
+                {
+                    return false;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

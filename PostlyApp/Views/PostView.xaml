@@ -17,6 +17,8 @@
         <Label Text="{Binding Post.CreatedAt, Converter={StaticResource DateTimeOffsetConverter}}" FontSize="13" TextColor="Grey"/>
         <Label Text="{Binding Post.Content}" FontSize="15"/>
 
+        <Image Source="{Binding PostImgUrl}"></Image>
+
         <HorizontalStackLayout Spacing="10">
             <Image Source="{Binding UpvoteImg}" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20" >
                 <Image.GestureRecognizers>
@@ -30,7 +32,11 @@
                 </Image.GestureRecognizers>
             </Image>
             <Label Text="{Binding Post.DownvoteCount}" />
-            <Image Source="comment.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20"  />
+            <Image Source="comment.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="CommentsBtnTapped"></TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
             <Label Text="{Binding Post.CommentCount}" />
         </HorizontalStackLayout>
     </VerticalStackLayout>

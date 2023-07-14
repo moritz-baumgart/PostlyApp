@@ -1,7 +1,4 @@
-﻿using PostlyApp.Services;
-using PostlyApp.Services.Impl;
-
-namespace PostlyApp;
+﻿namespace PostlyApp;
 
 public partial class App : Application
 {

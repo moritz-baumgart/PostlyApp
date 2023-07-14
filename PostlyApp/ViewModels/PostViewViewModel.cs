@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PostlyApp.Enums;
 using PostlyApp.Models.DTOs;
+using PostlyApp.Utilities;
 using System.ComponentModel;
 
 namespace PostlyApp.ViewModels
@@ -10,10 +11,10 @@ namespace PostlyApp.ViewModels
 
         [ObservableProperty]
         private PostDTO _post;
-
+        [ObservableProperty]
+        private UriImageSource? _postImgUrl;
         [ObservableProperty]
         private ImageSource _upvoteImg;
-
         [ObservableProperty]
         private ImageSource _downvoteImg;
 
@@ -24,6 +25,21 @@ namespace PostlyApp.ViewModels
             Post = post;
             post.PropertyChanged += OnVoteChange;
             OnVoteChange(post.Vote);
+        }
+
+        partial void OnPostChanged(PostDTO newPost)
+        {
+            if (newPost.AttachedImageUrl != null)
+            {
+                PostImgUrl = new UriImageSource
+                {
+                    Uri = new Uri(Constants.API_BASE + newPost.AttachedImageUrl)
+                };
+            }
+            else
+            {
+                PostImgUrl = null;
+            }
         }
 
         private void OnVoteChange(object? sender, PropertyChangedEventArgs e)

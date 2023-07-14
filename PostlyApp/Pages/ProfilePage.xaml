@@ -34,23 +34,16 @@
         <VerticalStackLayout Margin="20">
             <Grid Padding="0,0,0,1">
                 <Grid ColumnDefinitions="*, Auto"
-              RowDefinitions="Auto, Auto, Auto, Auto"
-              BackgroundColor="#1d1e27"
-              Padding="0, 0, 0, 30">
+                    RowDefinitions="Auto, Auto, Auto, Auto"
+                    BackgroundColor="#1d1e27"
+                    Padding="0, 0, 0, 30">
 
-                    <Border Grid.Row="0"
-                    Grid.Column="0"
-                    Stroke="White"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 50"
-                    HeightRequest="50"
-                    WidthRequest="50"
-                    HorizontalOptions="Start">
-                        <Image Source="userprofile.png"
-                       Aspect="Center"
-                       HeightRequest="30"
-                       WidthRequest="30"/>
-                    </Border>
+                    <Image Grid.Row="0"
+                            Grid.Column="0"
+                            Source="{Binding ProfilePicture}"
+                            HorizontalOptions="Start"
+                            HeightRequest="150"
+                            WidthRequest="150"/>
 
                     <Label Grid.Row="1"
                    Grid.ColumnSpan="2"
@@ -142,5 +135,5 @@
         </VerticalStackLayout>
     </ScrollView>
 
-    
+
 </ContentPage>
