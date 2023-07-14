@@ -94,7 +94,6 @@ namespace PostlyApp.Services.Impl
 
         }
 
-        public event Action<int> OnNewCommentCreated;
 
         public async Task<int?> AddComment(int postId, string commentContent)
         {
@@ -115,7 +114,6 @@ namespace PostlyApp.Services.Impl
                 if (res.IsSuccessStatusCode)
                 {
                     var newCommentCount = await ApiUtilities.DeserializeJsonResponse<int>(res);
-                    OnNewCommentCreated.Invoke(newCommentCount);
                     return newCommentCount;
                 }
                 else

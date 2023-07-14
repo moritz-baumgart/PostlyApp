@@ -2,27 +2,53 @@
 <mct:Popup   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:plyvm="clr-namespace:PostlyApp.ViewModels"
+             xmlns:dtos="clr-namespace:PostlyApp.Models.DTOs"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Postly.Views.PostdetailView"
+             x:DataType="plyvm:PostdetailViewModel"
              x:Name="postDetailPopup"
              CanBeDismissedByTappingOutsideOfPopup="True">
 
+    <ScrollView>
+        <ScrollView.Resources>
+            <ResourceDictionary>
+                <toolkit:DateTimeOffsetConverter x:Key="DateTimeOffsetConverter" />
+            </ResourceDictionary>
+        </ScrollView.Resources>
+        <VerticalStackLayout BackgroundColor="{StaticResource surface-card}" Padding="10,10,10,10">
+            <Label x:Name="author" FontAttributes="Bold" FontSize="14"/>
+            <Label x:Name="date" FontSize="10" TextColor="Grey"/>
+            <Label x:Name="content" FontSize="12"/>
 
-    <VerticalStackLayout BackgroundColor="{StaticResource surface-card}" Padding="10,10,10,10">
-        <Label x:Name="author" FontAttributes="Bold" FontSize="14"/>
-        <Label x:Name="date" FontSize="10" TextColor="Grey"/>
-        <Label x:Name="content" FontSize="12"/>
+            <CollectionView ItemsSource="{Binding Comments}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="dtos:CommentDTO">
+                        <Frame BorderColor="{StaticResource surface-border}" BackgroundColor="{StaticResource surface-card}" Padding="5" Margin="5">
+                            <VerticalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding Author.Username}"></Label>
+                                    <Label Text=" | "></Label>
+                                    <Label Text="{Binding CreatedAt, Converter={StaticResource DateTimeOffsetConverter}}"></Label>
+                                </HorizontalStackLayout>
+                                <Label Text="{Binding Content}"></Label>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
 
-
-        <Editor HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-               x:Name="Postdetailview"
+            <Editor HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+               x:Name="commentEditor"
                Placeholder="Leave a Comment..."
                MaxLength="282"
-               HeightRequest="100"/>
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
-            <Button Text="Comment" BackgroundColor="{StaticResource Gray500}" />
-            <Button Text="Discard" BackgroundColor="PaleVioletRed" Clicked="Button_Clicked" Grid.Column="3" />
-        </Grid>
-
-    </VerticalStackLayout>
+               HeightRequest="100"
+                    Margin="5,0,0,5"/>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="5,20,0,5">
+                <Button Text="Close" BackgroundColor="{StaticResource Gray300}" Clicked="Discard" />
+                <Button x:Name="newCommentBtn" Text="Comment" BackgroundColor="{StaticResource primary-color}" Clicked="CreateComment" Grid.Column="3" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </mct:Popup>

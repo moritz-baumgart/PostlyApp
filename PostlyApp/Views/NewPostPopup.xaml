@@ -4,7 +4,7 @@
            xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
            x:Class="PostlyApp.Views.NewPostPopup"
            CanBeDismissedByTappingOutsideOfPopup="False">
-    <VerticalStackLayout BackgroundColor="{StaticResource surface-card}" Spacing="10">
+    <VerticalStackLayout BackgroundColor="{StaticResource surface-card}" Spacing="10" Padding="20,0,20,0">
         <Label 
             Text="Let's Post something!"
             HorizontalOptions="CenterAndExpand"

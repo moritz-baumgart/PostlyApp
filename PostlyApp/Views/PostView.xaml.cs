@@ -84,7 +84,7 @@ public partial class PostView : ContentView
     {
         if (BindingContext is PostViewViewModel viewModel)
         {
-            Shell.Current.ShowPopup(new PostdetailView(viewModel.Post.Id));
+            Shell.Current.ShowPopup(new PostdetailView(viewModel.Post));
         }
     }
 }

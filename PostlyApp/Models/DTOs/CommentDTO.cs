@@ -1,10 +1,13 @@
-﻿namespace PostlyApp.Models.DTOs
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace PostlyApp.Models.DTOs
 {
-    public class CommentDTO
+    public partial class CommentDTO : ObservableObject
     {
-        public int Id { get; set; }
+        int Id { get; set; }
         public UserDTO Author { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
-        public string Content { get; set; }
+        [ObservableProperty]
+        private string _content;
     }
 }
