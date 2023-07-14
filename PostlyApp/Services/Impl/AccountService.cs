@@ -103,6 +103,52 @@ namespace PostlyApp.Services.Impl
             }
         }
 
+        public async Task<List<UserDTO>?> GetFollowers(string? username)
+        {
+            var uri = new Uri(Constants.API_BASE + $"/account/{username ?? "me"}/followers");
+
+            try
+            {
+                var res = await _client.GetAsync(uri);
+
+                if (!res.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+
+                return await ApiUtilities.DeserializeJsonResponse<List<UserDTO>?>(res);
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<UserDTO>?> GetFollowing(string? username)
+        {
+            var uri = new Uri(Constants.API_BASE + $"/account/{username ?? "me"}/following");
+
+            try
+            {
+                var res = await _client.GetAsync(uri);
+
+                if (!res.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+
+                return await ApiUtilities.DeserializeJsonResponse<List<UserDTO>?>(res);
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         /// <summary>
         /// Logs in a user with given credentials. Also saves jwt.
         /// </summary>

@@ -7,10 +7,17 @@
     <VerticalStackLayout BackgroundColor="{StaticResource surface-card}" Spacing="10">
         <Label 
             Text="Let's Post something!"
-            HorizontalOptions="CenterAndExpand" />
-        <Entry x:Name="newPostText"
-               Placeholder="Enter Text"
-               HorizontalOptions="CenterAndExpand"/>
-        <Button Text="Post" Clicked="PostButtonClicked" />
+            HorizontalOptions="CenterAndExpand"
+            FontSize="Medium" FontAttributes="Bold"/>
+        <Editor  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                    x:Name="newPostText"
+                    Placeholder="Enter Text"
+                    MaxLength="282"
+                    HeightRequest="100"/>
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
+            <Button Text="Close" Clicked="Button_Clicked" BackgroundColor="{StaticResource Gray300}" />
+            <Button Text="Post" Clicked="PostButtonClicked" BackgroundColor="{StaticResource primary-color}" Grid.Column="3"/>
+        </Grid>
     </VerticalStackLayout>
 </mct:Popup>

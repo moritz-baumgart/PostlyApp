@@ -6,7 +6,7 @@
              CanBeDismissedByTappingOutsideOfPopup="True">
 
   
-        <VerticalStackLayout BackgroundColor="{StaticResource surface-card}" Padding="10,10,10,10">
+    <VerticalStackLayout BackgroundColor="{StaticResource surface-card}" Padding="10,10,10,10">
             <Label x:Name="author" FontAttributes="Bold" FontSize="14"/>
             <Label x:Name="date" FontSize="10" TextColor="Grey"/>
             <Label x:Name="content" FontSize="12"/>
@@ -19,18 +19,16 @@
             <Image Source="comment.png" BackgroundColor="Transparent" MaximumHeightRequest="20" MaximumWidthRequest="20"  />
             <Label x:Name="  CommentCount" />
         </HorizontalStackLayout>
-            
-            <Entry x:Name="Postdetailview"
+
+        <Editor HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+               x:Name="Postdetailview"
                Placeholder="Leave a Comment..."
-               HorizontalOptions="Center"
                MaxLength="282"
-               MinimumHeightRequest="150"
-               MinimumWidthRequest="150"
-              />
-        <HorizontalStackLayout>
-            <Button Text="Comment" BackgroundColor="LightGreen" />
-            <Button Text="Discard" BackgroundColor="PaleVioletRed" Clicked="Button_Clicked" />
-        </HorizontalStackLayout>
+               HeightRequest="100"/>
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
+            <Button Text="Discard" BackgroundColor="PaleVioletRed" Clicked="Button_Clicked" Grid.Column="3" />
+            <Button Text="Comment" BackgroundColor="{StaticResource Gray500}" />
+        </Grid>
 
     </VerticalStackLayout>
 </mct:Popup>

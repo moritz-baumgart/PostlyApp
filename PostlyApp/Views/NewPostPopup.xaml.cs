@@ -41,4 +41,9 @@ public partial class NewPostPopup : Popup
             await toast.Show();
         }
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        Close();
+    }
 }
