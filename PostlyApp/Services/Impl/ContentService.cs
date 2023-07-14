@@ -1,14 +1,18 @@
 ﻿using PostlyApp.Enums;
 using PostlyApp.Models.DTOs;
+using PostlyApp.Models.Requests;
 using PostlyApp.Utilities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
 
 namespace PostlyApp.Services.Impl
 {
     internal class ContentService : IContentService
     {
         private readonly HttpClient _client;
+        private readonly JsonSerializerOptions _serializerOptions;
         private readonly IJwtService _jwt;
 
         public ContentService()
@@ -18,6 +22,12 @@ namespace PostlyApp.Services.Impl
             _client = new HttpClient(handlerService.GetPlatformMessageHandler());
 #else
             _client = new HttpClient();
+
+            _serializerOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
 #endif
             _jwt = DependencyService.Resolve<IJwtService>();
             _jwt.CurrentTokenChanged += OnTokenChange;
@@ -82,6 +92,41 @@ namespace PostlyApp.Services.Impl
                 return null;
             }
 
+        }
+
+        public event Action<int> OnNewCommentCreated;
+
+        public async Task<int?> AddComment(int postId, string commentContent)
+        {
+            var uriBuilder = new UriBuilder(Constants.API_BASE + "/comment");
+
+            var json = JsonSerializer.Serialize(new CommentCreateRequest
+            {
+                PostId = postId,
+                CommentContent = commentContent,
+            }, _serializerOptions);
+
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var res = await _client.PostAsync(uriBuilder.ToString(), content);
+                if (res.IsSuccessStatusCode)
+                {
+                    var newCommentCount = await ApiUtilities.DeserializeJsonResponse<int>(res);
+                    OnNewCommentCreated.Invoke(newCommentCount);
+                    return newCommentCount;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public async Task<List<CommentDTO>?> GetComments(long postId)

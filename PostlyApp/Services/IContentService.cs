@@ -12,6 +12,7 @@ namespace PostlyApp.Services
         public Task<VoteUpdateViewModel?> RemoveVote(int postId);
 
         public Task<int?> AddPost(string content);
+        public Task<int?> AddComment(int postId, string commentContent);
 
         public Task<PostDTO?> GetPost(long postId);
         public event Action<int> OnNewPostCreated;
