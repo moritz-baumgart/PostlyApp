@@ -2,6 +2,9 @@
 
 namespace PostlyApp.Converter
 {
+    /// <summary>
+    /// This converter converts a DateTimeOffset to formatted string containing only the date.
+    /// </summary>
     internal class DateTimeOffsetToDateOnlyConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -13,11 +13,17 @@ public partial class RegisterPage : ContentPage
         _account = DependencyService.Resolve<IAccountService>();
     }
 
+    /// <summary>
+    /// Is called when the login btn is clicked, navigates the user to the login page.
+    /// </summary>
     private async void OnSigninClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//Login");
     }
 
+    /// <summary>
+    /// Is called when the create account btn is clicked. Tries to register the user, displays warnings if username/pw is empty, if passwords do not match and if the username is already taken.
+    /// </summary>
     private async void Create_Clicked(object sender, EventArgs e)
     {
 

@@ -2,6 +2,10 @@
 {
     public class HttpsClientHandlerService
     {
+        /// <summary>
+        /// Createa a <see cref="HttpMessageHandler"/> with platform specific code for ignoring invalid ssl certs. Used for dev certs.
+        /// </summary>
+        /// <returns>The created <see cref="HttpMessageHandler"/> or null if not on the right plattform.</returns>
         public HttpMessageHandler GetPlatformMessageHandler()
         {
 #if ANDROID

@@ -17,6 +17,9 @@ public partial class PostlistView : ContentView
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Called when the list of posts changes, updates the child element that display the posts.
+    /// </summary>
     private static void OnPostsChanged(BindableObject bindable, object oldValue, object newValue)
     {
         if (bindable is PostlistView view)

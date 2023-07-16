@@ -14,6 +14,9 @@ public partial class NewPostPopup : Popup
         _content = DependencyService.Resolve<IContentService>();
     }
 
+    /// <summary>
+    /// Called when the post button inside the popup is clicked, tries to submit the post.
+    /// </summary>
     private async void PostButtonClicked(object sender, EventArgs e)
     {
         var text = newPostText.Text;
@@ -42,7 +45,10 @@ public partial class NewPostPopup : Popup
         }
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
+    /// <summary>
+    /// Called when the close btn inside the popup is clicked, closes the popup.
+    /// </summary>
+    private void CloseBtnClicked(object sender, EventArgs e)
     {
         Close();
     }

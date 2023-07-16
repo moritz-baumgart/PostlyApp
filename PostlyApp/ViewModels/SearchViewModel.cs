@@ -4,6 +4,9 @@ using System.Windows.Input;
 
 namespace PostlyApp.ViewModels
 {
+    /// <summary>
+    /// The view model of the <see cref="PostlyApp.Pages.SearchPage"/>.
+    /// </summary>
     class SearchViewModel : INotifyPropertyChanged
     {
 

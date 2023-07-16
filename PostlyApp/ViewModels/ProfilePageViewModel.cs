@@ -4,6 +4,9 @@ using PostlyApp.Utilities;
 
 namespace PostlyApp.ViewModels
 {
+    /// <summary>
+    /// The view model of the <see cref="PostlyApp.Pages.ProfilePage"/>.
+    /// </summary>
     internal partial class ProfilePageViewModel : ObservableObject
     {
         [ObservableProperty]
@@ -15,6 +18,10 @@ namespace PostlyApp.ViewModels
         [ObservableProperty]
         private string _followBtnText;
 
+        /// <summary>
+        /// Updates the follow btn text and the profile image url when the user profile changes.
+        /// </summary>
+        /// <param name="userProfile">The new user profile after the change.</param>
         partial void OnUserProfileChanged(UserProfileViewModel? userProfile)
         {
             if (userProfile != null)

@@ -23,7 +23,7 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-        // Services
+        // Register services so we can inject them elsewhere.
         DependencyService.RegisterSingleton<IJwtService>(new JwtService());
         DependencyService.RegisterSingleton<IAccountService>(new AccountService());
         DependencyService.RegisterSingleton<IContentService>(new ContentService());

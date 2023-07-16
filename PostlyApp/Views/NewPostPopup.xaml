@@ -16,7 +16,7 @@
                     HeightRequest="100"/>
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,20,0,0">
-            <Button Text="Close" Clicked="Button_Clicked" BackgroundColor="{StaticResource Gray300}" />
+            <Button Text="Close" Clicked="CloseBtnClicked" BackgroundColor="{StaticResource Gray300}" />
             <Button Text="Post" Clicked="PostButtonClicked" BackgroundColor="{StaticResource primary-color}" Grid.Column="3"/>
         </Grid>
     </VerticalStackLayout>

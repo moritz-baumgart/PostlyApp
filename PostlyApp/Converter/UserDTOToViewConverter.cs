@@ -3,6 +3,10 @@ using System.Globalization;
 
 namespace PostlyApp.Converter
 {
+    /// <summary>
+    /// This converter generates a formatted string containing the users Displayname and Username.
+    /// If there is no Displayname set it only formats the Username.
+    /// </summary>
     internal class UserDTOToViewConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,6 +1,5 @@
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Views;
-using Postly.Views;
 using PostlyApp.Enums;
 using PostlyApp.Models.DTOs;
 using PostlyApp.Services;
@@ -21,6 +20,9 @@ public partial class PostView : ContentView
         _content = DependencyService.Resolve<IContentService>();
     }
 
+    /// <summary>
+    /// Called when the upvote btn is clicked, tries to submit the upvote.
+    /// </summary>
     private async void UpvoteTapped(object sender, TappedEventArgs e)
     {
         if (voteChangeLoading || BindingContext is not PostViewViewModel viewModel)
@@ -43,6 +45,9 @@ public partial class PostView : ContentView
         voteChangeLoading = false;
     }
 
+    /// <summary>
+    /// Called when the downvote btn is clicked, tries to submit the downvote.
+    /// </summary>
     private async void DownvoteTapped(object sender, TappedEventArgs e)
     {
         if (voteChangeLoading || BindingContext is not PostViewViewModel viewModel)
@@ -65,6 +70,13 @@ public partial class PostView : ContentView
         voteChangeLoading = false;
     }
 
+    /// <summary>
+    /// Helper method to update the view after an upvote/downvote occured.
+    /// </summary>
+    /// <param name="update">The update to process.</param>
+    /// <param name="model">The model to apply the update to.</param>
+    /// <returns></returns>
+
     private async Task UpdateVotes(VoteUpdateViewModel? update, PostViewViewModel model)
     {
         if (update != null)
@@ -80,6 +92,9 @@ public partial class PostView : ContentView
         }
     }
 
+    /// <summary>
+    /// Called when the comment btn is clicked, opens up the popup with the postdetails and comments.
+    /// </summary>
     private void CommentsBtnTapped(object sender, TappedEventArgs e)
     {
         if (BindingContext is PostViewViewModel viewModel)

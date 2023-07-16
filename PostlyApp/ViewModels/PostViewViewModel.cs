@@ -6,6 +6,9 @@ using System.ComponentModel;
 
 namespace PostlyApp.ViewModels
 {
+    /// <summary>
+    /// The view model of the <see cref="PostlyApp.Views.PostView"/>.
+    /// </summary>
     internal partial class PostViewViewModel : ObservableObject
     {
 
@@ -27,6 +30,10 @@ namespace PostlyApp.ViewModels
             OnVoteChange(post.Vote);
         }
 
+        /// <summary>
+        /// Updates the AttachedImageUrl property when the post changes. This is required because the img url needs some additional formatting/type conversion.
+        /// </summary>
+        /// <param name="newPost">The new post.</param>
         partial void OnPostChanged(PostDTO newPost)
         {
             if (newPost.AttachedImageUrl != null)
@@ -42,6 +49,9 @@ namespace PostlyApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Updates the <see cref="UpvoteImg"/> and <see cref="DownvoteImg"/> with the help of <see cref="OnVoteChange"/> everytime the vote property changes.
+        /// </summary>
         private void OnVoteChange(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(PostDTO.Vote))
@@ -50,6 +60,10 @@ namespace PostlyApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Used by <see cref="OnVoteChange(object?, PropertyChangedEventArgs)"/> and at initialization to set the image reflecting the value of the vote on this post.
+        /// </summary>
+        /// <param name="vote">The vote type to react to.</param>
         private void OnVoteChange(VoteType? vote)
         {
             if (vote != null)

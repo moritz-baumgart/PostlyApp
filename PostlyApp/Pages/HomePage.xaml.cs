@@ -19,6 +19,11 @@ public partial class HomePage : ContentPage
         BindingContext = new HomePageViewModel();
     }
 
+    /// <summary>
+    /// This method listens to the new post event of the ContentService.
+    /// Is the user creates a new post it fetches and displays it.
+    /// </summary>
+    /// <param name="postId">The id of the post to fetch</param>
     private async void OnNewPostCreated(int postId)
     {
         var newPost = await _content.GetPost(postId);
@@ -35,6 +40,10 @@ public partial class HomePage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Lifecycle method called when the page appears.
+    /// It fetches the public ("recommended") feed and the private ("following") feed and passes it the the respective views.
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -48,6 +57,11 @@ public partial class HomePage : ContentPage
         privateFeed.Posts = await privFeedTask;
         loadMorePrivateBtn.IsVisible = true;
     }
+
+    /// <summary>
+    /// This is called when the load more btn on the public feed is clicked.
+    /// It fetches more posts and adds them to the view, if there are no new posts it dispalys an info message.
+    /// </summary>
 
     private async void OnLoadMorePublic(object sender, EventArgs e)
     {
@@ -81,6 +95,9 @@ public partial class HomePage : ContentPage
         loadMorePublicBtn.IsEnabled = true;
     }
 
+    /// <summary>
+    /// Same as <see cref="HomePage.OnLoadMorePublic(object, EventArgs)"/>, but for the private feed.
+    /// </summary>
     private async void OnLoadMorePrivate(object sender, EventArgs e)
     {
         loadMorePrivateBtn.IsEnabled = false;
@@ -115,11 +132,19 @@ public partial class HomePage : ContentPage
         loadMorePrivateBtn.IsEnabled = true;
     }
 
+    /// <summary>
+    /// This is called when the new post btn is clicked, it opens up the popup window with the new post UI.
+    /// </summary>
     private void NewPostClicked(object sender, EventArgs e)
     {
         this.ShowPopup(new NewPostPopup());
     }
 
+    /// <summary>
+    /// This is called by <see cref="HomePage.RecBtnClicked(object, EventArgs)"/> and <see cref="HomePage.FollowBtnClicked(object, EventArgs)"/>.
+    /// It sets the current tab of the tab navigation inside the view model.
+    /// </summary>
+    /// <param name="tabNr">The tabs nr to switch to.</param>
     private void ChangeTab(int tabNr)
     {
         if (BindingContext is HomePageViewModel viewModel)
@@ -128,11 +153,17 @@ public partial class HomePage : ContentPage
         }
     }
 
+    /// <summary>
+    /// This is called when the recommended feed btn is clicked, switches tabs accordingly.
+    /// </summary>
     private void RecBtnClicked(object sender, EventArgs e)
     {
         ChangeTab(0);
     }
 
+    /// <summary>
+    /// This is called when the following feed btn is clicked, switches tabs accordingly.
+    /// </summary>
     private void FollowBtnClicked(object sender, EventArgs e)
     {
         ChangeTab(1);

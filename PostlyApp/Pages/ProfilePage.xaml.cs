@@ -9,6 +9,9 @@ namespace PostlyApp.Pages;
 public partial class ProfilePage : ContentPage
 {
 
+    /// <summary>
+    /// Currently displayed User's username. Is set as navigation query parameter.
+    /// </summary>
     string? username;
     public string? Username
     {
@@ -33,6 +36,9 @@ public partial class ProfilePage : ContentPage
         _content = DependencyService.Resolve<IContentService>();
     }
 
+    /// <summary>
+    /// Lifecylce method that calls <see cref="ProfilePage.FetchCurrentUser"/> to load the users profile.
+    /// </summary>
     protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
     {
         base.OnNavigatingFrom(args);
@@ -43,12 +49,20 @@ public partial class ProfilePage : ContentPage
         await FetchCurrentUser();
     }
 
+    /// <summary>
+    /// Lifecylce method that calls <see cref="ProfilePage.FetchCurrentUser"/> to load the users profile.
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
         await FetchCurrentUser();
     }
 
+    /// <summary>
+    /// Fetches the profile of the with the username of the <see cref="ProfilePage.username"/> property,
+    /// which is set when navigating to this page, if it is not set it fetches it for the currently logged in user.
+    /// </summary>
+    /// <returns></returns>
     private async Task FetchCurrentUser()
     {
         if (BindingContext is ProfilePageViewModel viewModel)
@@ -69,6 +83,10 @@ public partial class ProfilePage : ContentPage
         }
     }
 
+    /// <summary>
+    /// This is called when the load more posts btn on the profile is called.
+    /// Fetches more posts and dispalys them, if there are no more posts it displays an info message.
+    /// </summary>
     private async void OnLoadMoreProfile(object sender, EventArgs e)
     {
         loadMoreBtnProfile.IsEnabled = false;
@@ -102,6 +120,11 @@ public partial class ProfilePage : ContentPage
         loadMoreBtnProfile.IsEnabled = true;
     }
 
+    /// <summary>
+    /// This method is called when the follow btn is clicked, depending on the view models follow state it follows or unfollows the displayed user.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private async void FollowBtnClicked(object sender, EventArgs e)
     {
         followBtn.IsEnabled = false;

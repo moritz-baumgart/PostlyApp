@@ -12,6 +12,7 @@ namespace PostlyApp.Services.Impl
 
         public SearchService()
         {
+            // If inside the emulator we have to initialize the http client to ignore invalid ssl certs.
 #if DEBUG && ANDROID
             var handlerService = new HttpsClientHandlerService();
             _client = new HttpClient(handlerService.GetPlatformMessageHandler());
@@ -25,6 +26,11 @@ namespace PostlyApp.Services.Impl
             };
         }
 
+        /// <summary>
+        /// Searches for users and returns the search result.
+        /// </summary>
+        /// <param name="username">The username to search for.</param>
+        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="UserDTO"/> if successful, null otherwise.</returns>
         public async Task<IEnumerable<UserDTO>?> SearchUsers(string username)
         {
             try

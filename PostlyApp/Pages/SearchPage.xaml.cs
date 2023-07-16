@@ -24,6 +24,9 @@ public partial class SearchPage : ContentPage
         BindingContext = this;
     }
 
+    /// <summary>
+    /// Is called when the search command is executed. Fetches the search results.
+    /// </summary>
     public async void OnSearch()
     {
         if (searchBar.Text.Length == 0)
@@ -42,6 +45,9 @@ public partial class SearchPage : ContentPage
             }
     }
 
+    /// <summary>
+    /// Is called when a user inside the search result is clicked, navigates to that user's profile.
+    /// </summary>
     private async void OnGoToProfile(object sender, TappedEventArgs e)
     {
         if (sender is Label label)
@@ -51,6 +57,9 @@ public partial class SearchPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Resets search bar and results when the user leaves the search page.
+    /// </summary>
     protected override void OnDisappearing()
     {
         base.OnDisappearing();

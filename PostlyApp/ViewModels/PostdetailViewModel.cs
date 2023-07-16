@@ -4,6 +4,9 @@ using PostlyApp.Models.DTOs;
 
 namespace PostlyApp.ViewModels
 {
+    /// <summary>
+    /// The view mopdel of the <see cref="PostlyApp.Views.PostdetailView"/>.
+    /// </summary>
     internal partial class PostdetailViewModel : ObservableObject
     {
         [ObservableProperty]

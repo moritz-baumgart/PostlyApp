@@ -19,6 +19,7 @@ namespace PostlyApp.Services.Impl
 
         public AccountService()
         {
+            // If inside the emulator we have to initialize the http client to ignore invalid ssl certs.
 #if DEBUG && ANDROID
             var handlerService = new HttpsClientHandlerService();
             _client = new HttpClient(handlerService.GetPlatformMessageHandler());
@@ -34,6 +35,10 @@ namespace PostlyApp.Services.Impl
             _jwt.CurrentTokenChanged += OnTokenChange;
         }
 
+        /// <summary>
+        /// Is called by the <see cref="JwtService.CurrentTokenChanged"/> event and updates the http clients headers.
+        /// </summary>
+        /// <param name="token">The new token to be used from now on.</param>
         private void OnTokenChange(JwtSecurityToken? token)
         {
             if (token != null)
@@ -80,6 +85,11 @@ namespace PostlyApp.Services.Impl
             }
         }
 
+        /// <summary>
+        /// Fetches the profile details of a users.
+        /// </summary>
+        /// <param name="username">The username of the user to fetch the details for.</param>
+        /// <returns>An <see cref="UserProfileViewModel"/> if the request was successful, null otherwise.</returns>
         public async Task<UserProfileViewModel?> GetUserProfile(string? username)
         {
             var uri = new Uri(Constants.API_BASE + $"/account/{username ?? "me"}/profile");
@@ -103,6 +113,11 @@ namespace PostlyApp.Services.Impl
             }
         }
 
+        /// <summary>
+        /// Fetches the users that follow the specified user.
+        /// </summary>
+        /// <param name="username">The username of the user to fetch the followers for.</param>
+        /// <returns>A <see cref="List{T}"/> of <see cref="UserDTO"/> if the request was successful, null otherwise.</returns>
         public async Task<List<UserDTO>?> GetFollowers(string? username)
         {
             var uri = new Uri(Constants.API_BASE + $"/account/{username ?? "me"}/followers");
@@ -126,6 +141,11 @@ namespace PostlyApp.Services.Impl
             }
         }
 
+        /// <summary>
+        /// Fetches the users the specified user follows.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <returns>A <see cref="List{T}"/> of <see cref="UserDTO"/> if the request was successful, null otherwise.</returns>
         public async Task<List<UserDTO>?> GetFollowing(string? username)
         {
             var uri = new Uri(Constants.API_BASE + $"/account/{username ?? "me"}/following");
@@ -150,10 +170,8 @@ namespace PostlyApp.Services.Impl
         }
 
         /// <summary>
-        /// Logs in a user with given credentials. Also saves jwt.
+        /// Logs in a user with given credentials. Also saves jwt using <see cref="JwtService"/>.
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
         /// <returns>True if login was successful, false if username/password was wrong, null if something went wrong.</returns>
         public async Task<bool?> Login(string username, string password)
         {
@@ -194,7 +212,7 @@ namespace PostlyApp.Services.Impl
 
 
         /// <summary>
-        /// Logs the user out by deleting the JWT and navigating back to the login
+        /// Logs the user out by deleting the JWT and navigating back to the login.
         /// </summary>
         public async void Logout()
         {
@@ -208,16 +226,31 @@ namespace PostlyApp.Services.Impl
             await toast.Show();
         }
 
+        /// <summary>
+        /// Follows the given user.
+        /// </summary>
+        /// <returns>An updated <see cref="UserProfileViewModel"/> if the request was successful, null otherwise.</returns>
+
         public Task<UserProfileViewModel?> FollowUser(string username)
         {
             return ChangeFollow(username, true);
         }
 
+        /// <summary>
+        /// Unfollows the given user.
+        /// </summary>
+        /// <returns>An updated <see cref="UserProfileViewModel"/> if the request was successful, null otherwise.</returns>
         public Task<UserProfileViewModel?> UnfollowUser(string username)
         {
             return ChangeFollow(username, false);
         }
 
+        /// <summary>
+        /// Helper method used by <see cref="FollowUser(string)"/> and <see cref="UnfollowUser(string)"/>.
+        /// </summary>
+        /// <param name="username">The username to change the following state for.</param>
+        /// <param name="isFollow">If true, follows the user, if false unfollows the user.</param>
+        /// <returns>An updated <see cref="UserProfileViewModel"/> if the request was successful, null otherwise.</returns>
         private async Task<UserProfileViewModel?> ChangeFollow(string username, bool isFollow)
         {
             var uriBuilder = new UriBuilder(Constants.API_BASE + $"/account/me/following/{username}");
@@ -251,6 +284,10 @@ namespace PostlyApp.Services.Impl
 
         }
 
+        /// <summary>
+        /// Tries to registers a user with the given credentials.
+        /// </summary>
+        /// <returns>Returns true if successful, false if the username is already in use, null if something went wrong.</returns>
         public async Task<bool?> Register(string username, string password)
         {
             var uriBuilder = new UriBuilder(Constants.API_BASE + "/account/register");

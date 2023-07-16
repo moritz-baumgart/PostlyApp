@@ -20,11 +20,18 @@ public partial class AppShell : Shell, INotifyPropertyChanged
         _jwt.CurrentTokenChanged += OnTokenChange;
     }
 
+    /// <summary>
+    /// Is called when the jwt token changes, updates the hello message inside the app shells flyout.
+    /// </summary>
+    /// <param name="token">The new token.</param>
     private void OnTokenChange(JwtSecurityToken token)
     {
         helloLabel.Text = "Hello, @" + _jwt.GetUserName() + "!";
     }
 
+    /// <summary>
+    /// Called on startup, redirects the user to the login page, if they are not logged in, otherwise updates the hello message in the flyout.
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -44,6 +51,9 @@ public partial class AppShell : Shell, INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// Logs the user out, when the logout btn is clicked.
+    /// </summary>
     private void OnLogoutClicked(object sender, EventArgs e)
     {
         _account.Logout();
